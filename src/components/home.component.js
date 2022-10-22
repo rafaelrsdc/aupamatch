@@ -55,13 +55,6 @@ export default class Home extends Component {
               <p className="max-w-sm text-center text-gray-500 md:text-left">
                 Uma plataforma simples e fácil para fazer o match entre Aupairs e Famílias. Faça o seu cadastro e conheça o site.
               </p>
-              <div className="flex justify-center md:justify-start">
-              <Link to={"/register"}>
-                <button class="bg-blue-500 hover:bg-blue-700 border-2 border-blue-500 hover:border-blue-700 text-white font-bold py-2 px-4 rounded">
-                  Cadastre-se
-                </button>
-              </Link>
-              </div>
             </div>
             <div className="md:w-4/5 ml-5">
               <img src={Herojpg}></img>
