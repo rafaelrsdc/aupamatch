@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import Herojpg from '../assets/site.png'
 import UserService from "../services/user.service";
