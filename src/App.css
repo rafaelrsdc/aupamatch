@@ -3,6 +3,10 @@ label {
   margin-top: 5px;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 .card-container.card {
   max-width: 458px !important;
   padding: 30px 30px;
