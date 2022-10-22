@@ -5,6 +5,8 @@ label {
 
 a:hover {
   text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 .card-container.card {

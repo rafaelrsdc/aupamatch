@@ -20,6 +20,8 @@ import EventBus from "./common/EventBus";
 import Busca from "./components/busca.component";
 import Dashboard from "./components/Dashboard";
 import Topbar from "./components/Topbar";
+import Footer from "./components/Footer";
+import Section from "./components/Section";
 
 class App extends Component {
   constructor(props) {
@@ -67,7 +69,6 @@ class App extends Component {
     return (
       <div>
 
-
         {currentUser ? (
           <>
             <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -96,10 +97,6 @@ class App extends Component {
                     <NavDropdown.Divider />
                     <Nav.Link href="/home" onClick={this.logOut}>Sair</Nav.Link>
                   </div>
-
-
-
-
                 </Nav>
               </Navbar.Collapse>
             </Navbar>
@@ -108,7 +105,7 @@ class App extends Component {
         ) : (
           <>
             <Topbar />
-
+            <Section />
           </>
         )}
 
@@ -127,6 +124,8 @@ class App extends Component {
             <Route path="/admin" element={<BoardAdmin />} />
           </Routes>
         </div>
+
+        <Footer />
 
         {/* <AuthVerify logOut={this.logOut}/> */}
       </div>
