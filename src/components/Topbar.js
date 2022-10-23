@@ -2,13 +2,21 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { Popover } from '@headlessui/react'
+import { useMediaQuery } from 'usehooks-ts'
 import {
   Bars3Icon,
   XMarkIcon
 } from '@heroicons/react/24/outline'
 import {Link} from 'react-router-dom'
 
+const styles = {
+  container: isZIndex => ({
+    zIndex: 20
+  })
+}
+
 export default function Topbar() {
+  const isZIndex = useMediaQuery('(min-width: 375px)');
   return (
     <Popover className="relative bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 border-b-2 border-gray-100 ">
@@ -43,7 +51,9 @@ export default function Topbar() {
         </div>
       </div>
 
-        <Popover.Panel focus className="absolute inset-x-0 top-0 origin-top-right transform p-2 transition md:hidden">
+        <Popover.Panel focus 
+          className="absolute inset-x-0 top-0 origin-top-right transform p-2 transition md:hidden"
+          style={styles.container(isZIndex)}>
           <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
             <div className="px-5 pt-5 pb-6">
               <div className="flex items-center justify-between">

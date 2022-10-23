@@ -105,7 +105,6 @@ class App extends Component {
         ) : (
           <>
             <Topbar />
-            <Section />
           </>
         )}
 
@@ -113,7 +112,7 @@ class App extends Component {
         <div className="">
           <Routes>
 
-            <Route path="/home" element={<Home />} />
+            <Route path="/home" element={<Section />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />

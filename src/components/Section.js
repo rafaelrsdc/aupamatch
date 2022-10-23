@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 
-export default function Example() {
+export default function Section() {
   return (
     <div className="relative overflow-hidden bg-gray-50 border-b-2 border-gray-100">
       <div className="mx-auto max-w-7xl">
@@ -49,7 +49,7 @@ export default function Example() {
       <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
         <img
           className="h-56 w-full object-cover sm:h-72 md:h-96 lg:h-full lg:w-full"
-          src="https://www.aupair.com/summaryBoxImages/au-pair-wiki-au-pair-definition-2322.jpg"
+          src="https://careasone.com/blog/wp-content/uploads/2020/06/shutterstock_1401621869.jpg"
           alt="Mulher ajudando criança"
         />
       </div>

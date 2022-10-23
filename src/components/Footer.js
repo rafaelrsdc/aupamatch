@@ -11,7 +11,7 @@ export default function Footer() {
                 <a>Contato</a>
                 <a>Parceiros</a>
             </div>
-            <p className="flex justify-center mt-8 text-sm text-gray-500">© 2022 Workflow, Inc. All rights reserved.</p>
+            <p className="flex justify-center mt-8 text-sm text-gray-500">© 2022 AupaMatch, Todos os direitos reservados.</p>
         </div>
     )   
 }
