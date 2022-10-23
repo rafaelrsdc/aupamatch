@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
+import ImgAupair from '../assets/img-au-pair.jpg'
 
 export default function Section() {
   return (
@@ -49,7 +50,7 @@ export default function Section() {
       <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
         <img
           className="h-56 w-full object-cover sm:h-72 md:h-96 lg:h-full lg:w-full"
-          src="https://careasone.com/blog/wp-content/uploads/2020/06/shutterstock_1401621869.jpg"
+          src={ImgAupair}
           alt="Mulher ajudando criança"
         />
       </div>
