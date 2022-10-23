@@ -52,7 +52,7 @@ class Vaga(models.Model):
         AuPair, through='Candidatura', related_name='candidaturas')
 
 class Candidatura(models.Model): # AuPairVaga
-    aupair = models.ForeignKey(AuPair, null=True, on_delete=models.CASCADE)
-    vaga = models.ForeignKey(Vaga, null=True, on_delete=models.CASCADE)
+    aupair = models.ForeignKey(AuPair, on_delete=models.CASCADE)
+    vaga = models.ForeignKey(Vaga, on_delete=models.CASCADE)
     candidatou_se = models.BooleanField(default=False)
 
