@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'project.custom_auth'
+    'drf_yasg',
+    'project.custom_auth',
+    'project.bases'
 ]
 
 if DEBUG: INSTALLED_APPS.append('django_extensions')
