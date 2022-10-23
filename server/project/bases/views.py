@@ -27,5 +27,5 @@ class AgenciaViewSet(viewsets.ModelViewSet):
 
 class CandidaturaViewSet(viewsets.ModelViewSet):
     queryset = Candidatura.objects.all()
-    serializer_class = CaracteristicaSerializer
+    serializer_class = CandidaturaSerializer
 
