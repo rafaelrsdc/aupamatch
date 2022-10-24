@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import ImgAupair from '../assets/img-au-pair.jpg'
+import {Link} from 'react-router-dom'
 
 export default function Section() {
   return (
@@ -27,20 +28,24 @@ export default function Section() {
               </p>
               <div className="mt-4 sm:mt-4 sm:flex sm:justify-center lg:justify-start">
                 <div className="mt-3 sm:mt-0 sm:ml-3">
+                  <Link to="/login">
                   <a
                     href="#"
                     className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-500 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg"
                   >
                     Família
                   </a>
+                </Link>
                 </div>
                 <div className="mt-3 sm:mt-0 sm:ml-3">
-                  <a
-                    href="#"
-                    className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-100 px-8 py-3 text-base font-medium text-indigo-700 hover:bg-indigo-200 md:py-4 md:px-10 md:text-lg"
-                  >
-                    Au Pair
-                  </a>
+                  <Link to="/login">
+                    <a
+                      href="#"
+                      className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-100 px-8 py-3 text-base font-medium text-indigo-700 hover:bg-indigo-200 md:py-4 md:px-10 md:text-lg"
+                    >
+                      Au Pair
+                    </a>
+                  </Link>
                 </div>
               </div>
             </div>
