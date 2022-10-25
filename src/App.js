@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+import "./styles/App.css";
 import { Dropdown, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
 

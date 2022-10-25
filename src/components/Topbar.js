@@ -1,13 +1,16 @@
-/* eslint-disable jsx-a11y/no-redundant-roles */
 /* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable no-unused-vars */
+/* eslint-disable jsx-a11y/no-redundant-roles */
 import React from "react";
 import { Popover } from '@headlessui/react'
 import { useMediaQuery } from 'usehooks-ts'
+import { Link } from 'react-router-dom'
+import '../translate/i18n'
 import {
   Bars3Icon,
   XMarkIcon
 } from '@heroicons/react/24/outline'
-import {Link} from 'react-router-dom'
 
 const styles = {
   container: isZIndex => ({
