@@ -13,6 +13,7 @@
 - foto:varchar
 - carro_exclusivo:bool
 - tem_agencia:bool
+- qnt_criancas
 
 # AuPairIdioma
 - id_aupair
@@ -38,6 +39,8 @@
 - natacao:bool
 - habilitada:bool
 - carro_exclusivo:bool
+- qnt_criancas
+- desc
 
 # VagaIdioma
 - id_vaga
@@ -59,3 +62,14 @@
 1. A famiília informa dias da semana e horários de trabalho e folgas.
 2. Períodi de duração da vaga (data inicial e data final).
 3. A au pair informa a data de embarque. Exemplo: 1 de janeiro de 2023
+
+---
+# Notas
+1. Considerar paginação
+2. MPV
+  1. Cadastro de cada perfil (família e au pair)
+  2. Log in
+  3. Home
+  4. Publicação de vagas pela família
+  5. Painel de vagas: visualização de vagas pelo au pair (tela do Figma)
+  6. Match: exibir vagas em ordem decrescente de compatibilidade
