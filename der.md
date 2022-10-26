@@ -11,6 +11,8 @@
 - natacao:bool
 - habilitada:bool
 - foto:varchar
+- carro_exclusivo:bool
+- tem_agencia:bool
 
 # AuPairIdioma
 - id_aupair
@@ -20,6 +22,7 @@
 # Agencia
 
 # Familia
+- tem_agencia:bool
 
 # Idiomas
 - id
@@ -34,11 +37,21 @@
 - experiencia
 - natacao:bool
 - habilitada:bool
+- carro_exclusivo:bool
 
 # VagaIdioma
 - id_vaga
 - id_idioma
 - nivel
+
+# AuPairCertificado
+- id_aupair
+- id_certificado
+- data_validade_inicio
+- data_validade_fim
+- link
+- desc
+- titulo
 
 ---
 # Cenários
