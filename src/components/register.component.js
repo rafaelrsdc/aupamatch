@@ -247,7 +247,7 @@ export default class Register extends Component {
 
                     <div className="form-group">
                       <button
-                        className="btn btn-primary btn-block"
+                        className="w-100 whitespace-nowrap rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-600"
                         disabled={this.state.loading}
                       >
                         {this.state.loading && (

@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import './styles/index.css'
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import './translate/i18n';
 
 const container = document.getElementById("root");
 const root = createRoot(container);

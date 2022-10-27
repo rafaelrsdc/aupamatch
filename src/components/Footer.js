@@ -18,7 +18,7 @@ const listItems = list.map((item) =>
 export default function Footer() {
     return (
         <div className="mx-auto max-w-7xl bg-white py-8">
-            <div className="flex justify-center gap-10">
+            <div className="list flex justify-center gap-10">
                 {listItems} 
             </div>
         </div>
