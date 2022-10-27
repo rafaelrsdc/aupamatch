@@ -3,11 +3,11 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { Link, Navigate} from "react-router-dom"
-
 import AuthService from "../services/auth.service";
-
 import { withRouter } from '../common/with-router';
-import Navbar from "./Navbar";
+
+import showPwdImg from "../assets/show-password.svg"
+import hidePwdImg from "../assets/hide-password.svg"
 
 const required = value => {
   if (!value) {
@@ -96,25 +96,13 @@ class Login extends Component {
   render() {
     const { currentUser } = this.state;
     return (
-
       <div className="flex flex-auto">
         {currentUser ? (<Navigate to="/profile"/>
 
-          ) : (<div></div>)}
-        <div className="hidden 2xl:flex fixed top-0 left-0 w-56 shadow-md bg-white h-full border-r bg-black">
-          <div className="w-56 h-screen px-4 py-4 text-2xl font-semibold  bold text-center text-bold">
-            <Link to="/home" style={{textDecoration: 'none'}} >
-              <p className='text-black'>
-                AupaMatch
-              </p></Link>
-          </div>
-        </div>
+        ) : (<div></div>)}
       
         <div className="w-full h-screen justify-center bg-bookmark-grey" >
           <div className="card card-container bg-white">
-            <p className=" text-2xl">Faça Login em sua conta</p>
-
-
             <Form
               onSubmit={this.handleLogin}
               ref={c => {
@@ -122,7 +110,7 @@ class Login extends Component {
               }}
             >
               <div className="form-group">
-                <label htmlFor="username">Usuário</label>
+                <label htmlFor="username" className="font-medium">Usuário</label>
                 <Input
                   type="text"
                   className="form-control"
@@ -133,8 +121,8 @@ class Login extends Component {
                 />
               </div>
 
-              <div className="form-group">
-                <label htmlFor="password">Senha</label>
+              <div className="form-group mb-1">
+                <label htmlFor="password" className="font-medium">Senha</label>
                 <Input
                   type="password"
                   className="form-control"
@@ -145,13 +133,17 @@ class Login extends Component {
                 />
               </div>
 
+              <div class="text-sm mb-4">
+                <a href="#" class="font-medium text-indigo-400 hover:text-indigo-500">Esqueci minha senha</a>
+              </div>
+
               <div className="form-group">
                 <button
-                  className="btn btn-primary btn-block"
+                  className="w-100 whitespace-nowrap rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-600"
                   disabled={this.state.loading}
                 >
                   {this.state.loading && (
-                    <span className="spinner-border spinner-border-sm"></span>
+                    <span className="spinner-border spinner-border-sm mr-2"></span>
                   )}
                   <span>Entrar</span>
                 </button>
@@ -171,10 +163,9 @@ class Login extends Component {
                 }}
               />
 
-          <p class="mt-3 text-xs font-light text-gray-500">
-            Não tem conta?<Link to="/register" class="ml-1 font-medium text-blue-400">Faça Cadastro</Link>
-            </p>
-
+              <p class="mt-3 text-xs text-center font-light text-gray-500">
+                Não tem conta?<Link to="/register" class="ml-1 font-medium text-indigo-400 hover:text-indigo-500">Registre-se</Link>
+              </p>
             </Form>
           </div>
         </div>
