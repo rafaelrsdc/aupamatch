@@ -67,9 +67,9 @@
 # Notas
 1. Considerar paginação
 2. MPV
-  1. Cadastro de cada perfil (família e au pair)
-  2. Log in
-  3. Home
-  4. Publicação de vagas pela família
-  5. Painel de vagas: visualização de vagas pelo au pair (tela do Figma)
-  6. Match: exibir vagas em ordem decrescente de compatibilidade
+  - Cadastro de cada perfil (família e au pair)
+  - Log in
+  - Home
+  - Publicação de vagas pela família
+  - Painel de vagas: visualização de vagas pelo au pair (tela do Figma)
+  - Match: exibir vagas em ordem decrescente de compatibilidade
