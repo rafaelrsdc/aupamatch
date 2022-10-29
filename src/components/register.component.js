@@ -152,14 +152,6 @@ export default class Register extends Component {
 
       <div className="flex flex-auto">
         {currentUser ? (<Navigate to="/profile" />) : (<></>)}
-        <div className="hidden 2xl:flex fixed top-0 left-0 w-56 shadow-md bg-white h-full border-r bg-black">
-          <div className="w-56 h-screen px-4 py-4 text-2xl font-semibold  bold text-center text-bold">
-            <Link to="/home" style={{ textDecoration: 'none' }} >
-              <p className='text-black'>
-                AupaMatch
-              </p></Link>
-          </div>
-        </div>
         <div className="w-full h-screen justify-center bg-bookmark-grey" >
           <div className="col-md-12">
             <div className="card card-container bg-white">
