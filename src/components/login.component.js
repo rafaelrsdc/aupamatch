@@ -1,13 +1,16 @@
-import React, { Component} from "react";
+import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import { Link, Navigate} from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 import AuthService from "../services/auth.service";
 import { withRouter } from '../common/with-router';
 
+import { Translation } from "react-i18next"
+
 import showPwdImg from "../assets/show-password.svg"
 import hidePwdImg from "../assets/hide-password.svg"
+
 
 const required = value => {
   if (!value) {
@@ -34,7 +37,7 @@ class Login extends Component {
       currentUser: undefined,
     };
   }
-  
+
   componentDidMount() {
     const user = AuthService.getCurrentUser();
 
@@ -95,12 +98,13 @@ class Login extends Component {
 
   render() {
     const { currentUser } = this.state;
+    const { t } = this.props
     return (
       <div className="flex flex-auto">
-        {currentUser ? (<Navigate to="/profile"/>
+        {currentUser ? (<Navigate to="/profile" />
 
         ) : (<div></div>)}
-      
+
         <div className="w-full h-screen justify-center bg-bookmark-grey" >
           <div className="card card-container bg-white">
             <Form
@@ -110,7 +114,13 @@ class Login extends Component {
               }}
             >
               <div className="form-group">
-                <label htmlFor="username" className="font-medium">Usuário</label>
+                <label htmlFor="username" className="font-medium">
+                  <Translation>
+                    {
+                      t => <>{t("user")}</>
+                    }
+                  </Translation>
+                </label>
                 <Input
                   type="text"
                   className="form-control"
@@ -122,7 +132,12 @@ class Login extends Component {
               </div>
 
               <div className="form-group mb-1">
-                <label htmlFor="password" className="font-medium">Senha</label>
+                <label htmlFor="password" className="font-medium">
+                  <Translation>
+                    {
+                      t => <>{t("password")}</>
+                    }
+                  </Translation></label>
                 <Input
                   type="password"
                   className="form-control"
@@ -134,7 +149,13 @@ class Login extends Component {
               </div>
 
               <div class="text-sm mb-4">
-                <a href="#" class="font-medium text-indigo-400 hover:text-indigo-500">Esqueci minha senha</a>
+                <a href="#" class="font-medium text-indigo-400 hover:text-indigo-500">
+                <Translation>
+                    {
+                      t => <>{t("forgot")}</>
+                    }
+                  </Translation>
+                </a>
               </div>
 
               <div className="form-group">
@@ -145,7 +166,12 @@ class Login extends Component {
                   {this.state.loading && (
                     <span className="spinner-border spinner-border-sm mr-2"></span>
                   )}
-                  <span>Entrar</span>
+                  <span>
+                    <Translation>
+                      {
+                        t => <>{t('login')}</>
+                      }
+                    </Translation></span>
                 </button>
               </div>
 
@@ -164,7 +190,16 @@ class Login extends Component {
               />
 
               <p class="mt-3 text-xs text-center font-light text-gray-500">
-                Não tem conta?<Link to="/register" class="ml-1 font-medium text-indigo-400 hover:text-indigo-500">Registre-se</Link>
+                
+              <Translation>
+                      {
+                        t => <>{t('noACC')}</>
+                      }
+                    </Translation><Link to="/register" class="ml-1 font-medium text-indigo-400 hover:text-indigo-500"><Translation>
+                      {
+                        t => <>{t('register')}</>
+                      }
+                    </Translation></Link>
               </p>
             </Form>
           </div>
