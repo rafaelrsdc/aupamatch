@@ -13,6 +13,9 @@ import {
 import { useTranslation } from "react-i18next";
 import { Dropdown, DropdownToggle , Form} from 'react-bootstrap';
 
+import BRFLAG from "../assets/brasil-flag.svg"
+import USFLAG from "../assets/eua-flag.svg"
+
 import i18n from "../i18n"
 
 const styles = {
@@ -73,9 +76,10 @@ export default function Topbar() {
               </a>
             </Link>
           </div>
-          <div>
-            <button className="mr-2 p-1 whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900" onClick={changeLanguage("en")}>EN</button>  
-            <button className="mr-2 p-1 whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900" onClick={changeLanguage("pt")}>PT</button>       
+          <div className="flex w-10">
+          <img src={BRFLAG} className="mr-1" alt="my image" onClick={changeLanguage("pt")}/>
+            <img src={USFLAG} className="ml-1" alt="my image" onClick={changeLanguage("en")}/>
+                 
           </div>
         </div>
         
