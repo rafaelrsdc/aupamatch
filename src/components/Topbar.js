@@ -11,6 +11,9 @@ import {
   XMarkIcon
 } from '@heroicons/react/24/outline'
 import { useTranslation } from "react-i18next";
+import { Dropdown, DropdownToggle , Form} from 'react-bootstrap';
+
+import i18n from "../i18n"
 
 const styles = {
   container: isZIndex => ({
@@ -18,9 +21,26 @@ const styles = {
   })
 }
 
+
+
 export default function Topbar() {
   const isZIndex = useMediaQuery('(min-width: 375px)');
-  const {t} = useTranslation()
+  const {t, i18n} = useTranslation();
+
+  const changeLanguage = (ln) => {
+    return() => {
+      i18n.changeLanguage(ln)
+    }
+  }
+  
+  const handleSelectChange = event => {
+  
+    changeLanguage(event.target.value)
+    console.log(event.target.value)
+  
+    window.location = window.location
+  
+  }
 
   return (
     <Popover className="relative bg-white">
@@ -41,7 +61,7 @@ export default function Topbar() {
                 href="#" 
                 className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
               >
-                {t('topbar.entrar')}
+                {t("login")}
               </a>
             </Link>
             <Link to={"/register"}>
@@ -49,11 +69,16 @@ export default function Topbar() {
                 href="#"
                 className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-600"
               >
-                Cadastre-se
+                {t("signup")}
               </a>
             </Link>
           </div>
+          <div>
+            <button className="mr-2 p-1 whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900" onClick={changeLanguage("en")}>EN</button>  
+            <button className="mr-2 p-1 whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900" onClick={changeLanguage("pt")}>PT</button>       
+          </div>
         </div>
+        
       </div>
 
         <Popover.Panel focus 
