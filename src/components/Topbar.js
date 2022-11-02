@@ -76,7 +76,7 @@ export default function Topbar() {
               </a>
             </Link>
           </div>
-          <div className="flex w-10">
+          <div className="flex w-10 mr-4">
           <img src={BRFLAG} className="mr-1" alt="my image" onClick={changeLanguage("pt")}/>
             <img src={USFLAG} className="ml-1" alt="my image" onClick={changeLanguage("en")}/>
                  
