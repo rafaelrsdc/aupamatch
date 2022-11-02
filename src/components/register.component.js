@@ -62,11 +62,13 @@ export default class Register extends Component {
     this.handleRegister = this.handleRegister.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.onChangeName = this.onChangeName.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
 
     this.state = {
       currentUser: undefined,
       username: "",
+      name: "",
       email: "",
       password: "",
       loading: false,
@@ -87,6 +89,12 @@ export default class Register extends Component {
   onChangeUsername(e) {
     this.setState({
       username: e.target.value
+    });
+  }
+
+  onChangeName(e) {
+    this.setState({
+      name: e.target.value
     });
   }
 
@@ -117,7 +125,9 @@ export default class Register extends Component {
       AuthService.register(
         this.state.username,
         this.state.email,
-        this.state.password
+        this.state.password,
+        this.state.name,
+        this.state.phone
       ).then(
         response => {
           this.setState({
@@ -202,6 +212,8 @@ export default class Register extends Component {
                         type="text"
                         className="form-control"
                         name="name"
+                        value={this.state.name}
+                        onChange={this.onChangeName}
                       />
                     </div>
                     <span className="text-xs">
