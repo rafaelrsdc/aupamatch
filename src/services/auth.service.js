@@ -1,31 +1,21 @@
 import axios from "axios";
 
-
-const API_URL = "http://ec2-54-88-18-242.compute-1.amazonaws.com/api/";
+const API_URL = "https://aupamatch-api2.onrender.com/api/auth/";
 
 class AuthService {
   login(username, password) {
-
     return axios
-      .post(API_URL + "token/", {
+      .post(API_URL + "signin", {
         username,
         password
       })
       .then(response => {
-        if (response.data.access) {
-          const token = response.data.access;
-          return axios
-	          .get(API_URL + "users/verify_credentials", { headers: { Authorization: 'Bearer ' + token } })
-	          .then((r) => {
-	            let user = r.data;
-	            user["access"] = token;
-	            user["refresh"] = response.data.refresh;
-
-                localStorage.setItem("user", JSON.stringify(user));
-              })
+        if (response.data.accessToken) {
+          localStorage.setItem("user", JSON.stringify(response.data));
         }
+
         return response.data;
-      })
+      });
   }
 
   logout() {
@@ -33,12 +23,10 @@ class AuthService {
   }
 
   register(username, email, password) {
-    const is_active = true;
-    return axios.post(API_URL + "users/", {
+    return axios.post(API_URL + "signup", {
       username,
       email,
-      password,
-      is_active
+      password
     });
   }
 

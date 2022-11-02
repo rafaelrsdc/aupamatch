@@ -1,17 +1,15 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const API_URL = "http://ec2-54-88-18-242.compute-1.amazonaws.com/api/";
+const API_URL = 'https://aupamatch-api2.onrender.com/api/test/';
 
 class UserService {
   getPublicContent() {
     return axios.get(API_URL + 'all');
   }
 
-  async getUserBoard() {
-	const ret=  await axios.get(API_URL + 'users/verify_credentials/', { headers: authHeader() }).data;
-
-    return ret;
+  getUserBoard() {
+    return axios.get(API_URL + 'user', { headers: authHeader() });
   }
 
   getModeratorBoard() {
