@@ -105,7 +105,7 @@ class Login extends Component {
 
         ) : (<div></div>)}
 
-        <div className="w-full h-screen justify-center bg-bookmark-grey" >
+        <div className="w-full h-screen justify-center bg-gray-50 border-b-2 border-gray-100" >
           <div className="card card-container bg-white">
             <Form
               onSubmit={this.handleLogin}
@@ -114,7 +114,7 @@ class Login extends Component {
               }}
             >
               <div className="form-group">
-                <label htmlFor="username" className="font-medium">
+                <label htmlFor="username" className="font-medium text-sm">
                   <Translation>
                     {
                       t => <>{t("user")}</>
@@ -132,7 +132,7 @@ class Login extends Component {
               </div>
 
               <div className="form-group mb-1">
-                <label htmlFor="password" className="font-medium">
+                <label htmlFor="password" className="font-medium text-sm">
                   <Translation>
                     {
                       t => <>{t("password")}</>

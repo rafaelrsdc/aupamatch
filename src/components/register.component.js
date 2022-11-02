@@ -155,16 +155,16 @@ export default class Register extends Component {
 
       <div className="flex flex-auto">
         {currentUser ? (<Navigate to="/profile" />) : (<></>)}
-        <div className="w-full h-screen justify-center bg-bookmark-grey" >
+        <div className="w-full h-full justify-center bg-gray-50 border-b-2 border-gray-100" >
           <div className="col-md-12">
             <div className="card card-container bg-white">
-              <h4 className="font-normal">
+              <h4 className="font-medium text-xl">
                 <Translation>
                   {
-                    t => <>{t("register")}</>
+                    t => <>{t("")}</>
                   }
-                </Translation></h4>
-
+                </Translation>
+              </h4>
 
               <Form
                 onSubmit={this.handleRegister}
@@ -175,7 +175,7 @@ export default class Register extends Component {
                 {!this.state.successful && (
                   <div>
                     <div className="form-group">
-                      <label htmlFor="username">
+                      <label htmlFor="username" className="font-medium text-sm">
                         <Translation>
                           {
                             t => <>{t("user")}</>
@@ -192,7 +192,7 @@ export default class Register extends Component {
                     </div>
 
                     <div className="form-group mb-0 mt-3">
-                      <label htmlFor="username">                 
+                      <label htmlFor="username" className="font-medium text-sm">                 
                        <Translation>
                     {
                       t => <>{t("name")}</>
@@ -212,8 +212,8 @@ export default class Register extends Component {
                   </Translation></span>
 
 
-                    <div className="form-group ">
-                      <label htmlFor="email">Email</label>
+                    <div className="form-group">
+                      <label htmlFor="email" className="font-medium text-sm">Email</label>
                       <Input
                         type="text"
                         className="form-control"
@@ -224,7 +224,7 @@ export default class Register extends Component {
                       />
                     </div>
 
-                    <p className="mb-2">                  
+                    <p className="mb-2 font-medium text-sm">                  
                     <Translation>
                     {
                       t => <>{t("phone")}</>
@@ -238,7 +238,7 @@ export default class Register extends Component {
                     />
 
                     <div className="form-group containerIMG mb-0">
-                      <label htmlFor="password">                  
+                      <label htmlFor="password" className="font-medium text-sm">                  
                       <Translation>
                     {
                       t => <>{t("password")}</>
@@ -321,7 +321,7 @@ export default class Register extends Component {
                     {
                       t => <>{t("registred")}</>
                     }
-                  </Translation><Link to="/login" class="ml-1 font-medium text-blue-400"><Translation>
+                  </Translation><Link to="/login" class="ml-1 font-medium text-indigo-400 hover:text-indigo-500"><Translation>
                     {
                       t => <>{t("login")}</>
                     }
