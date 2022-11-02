@@ -3,7 +3,10 @@ import React from 'react'
 import ImgAupair from '../assets/img-au-pair.jpg'
 import {Link} from 'react-router-dom'
 
+import { useTranslation } from 'react-i18next'
+
 export default function Section() {
+  const {t, i18n} = useTranslation();
   return (
     <div className="relative overflow-hidden bg-gray-50 border-b-2 border-gray-100">
       <div className="mx-auto max-w-7xl">
@@ -20,11 +23,11 @@ export default function Section() {
           <main className="mx-auto mt-10 max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
             <div className="sm:text-center lg:text-left">
               <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
-                <span className="block xl:inline">Encontre seu</span>{' '}
+                <span className="block xl:inline">{t("greeting")}</span>{' '}
                 <span className="block text-indigo-600 xl:inline">Match</span>
               </h1>
               <p className="mt-3 text-base text-gray-500 sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0">
-                Já imaginou uma plataforma para encontrar seu match ideal. Informe o perfil que está buscando para que possamos lhe ajudar.
+                {t("description")}
               </p>
               <div className="mt-4 sm:mt-4 sm:flex sm:justify-center lg:justify-start">
                 <div className="mt-3 sm:mt-0 sm:ml-3">
@@ -33,7 +36,7 @@ export default function Section() {
                     href="#"
                     className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-500 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg"
                   >
-                    Família
+                    {t("family")}
                   </a>
                 </Link>
                 </div>

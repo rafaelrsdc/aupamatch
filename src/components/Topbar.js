@@ -11,6 +11,12 @@ import {
   XMarkIcon
 } from '@heroicons/react/24/outline'
 import { useTranslation } from "react-i18next";
+import { Dropdown, DropdownToggle , Form} from 'react-bootstrap';
+
+import BRFLAG from "../assets/brasil-flag.svg"
+import USFLAG from "../assets/eua-flag.svg"
+
+import i18n from "../i18n"
 
 const styles = {
   container: isZIndex => ({
@@ -18,9 +24,26 @@ const styles = {
   })
 }
 
+
+
 export default function Topbar() {
   const isZIndex = useMediaQuery('(min-width: 375px)');
-  const {t} = useTranslation()
+  const {t, i18n} = useTranslation();
+
+  const changeLanguage = (ln) => {
+    return() => {
+      i18n.changeLanguage(ln)
+    }
+  }
+  
+  const handleSelectChange = event => {
+  
+    changeLanguage(event.target.value)
+    console.log(event.target.value)
+  
+    window.location = window.location
+  
+  }
 
   return (
     <Popover className="relative bg-white">
@@ -41,7 +64,7 @@ export default function Topbar() {
                 href="#" 
                 className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
               >
-                {t('topbar.entrar')}
+                {t("login")}
               </a>
             </Link>
             <Link to={"/register"}>
@@ -49,11 +72,17 @@ export default function Topbar() {
                 href="#"
                 className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-600"
               >
-                Cadastre-se
+                {t("signup")}
               </a>
             </Link>
           </div>
+          <div className="flex w-10 mr-4">
+          <img src={BRFLAG} className="mr-1" alt="my image" onClick={changeLanguage("pt")}/>
+            <img src={USFLAG} className="ml-1" alt="my image" onClick={changeLanguage("en")}/>
+                 
+          </div>
         </div>
+        
       </div>
 
         <Popover.Panel focus 

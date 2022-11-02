@@ -14,6 +14,8 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/high-res.css'
 import ReCAPTCHA from "react-google-recaptcha"
 
+import { Translation } from "react-i18next"
+
 const required = value => {
   if (!value) {
     return (
@@ -148,6 +150,7 @@ export default class Register extends Component {
 
   render() {
     const { currentUser, passwordShown } = this.state;
+    const { t } = this.props
     return (
 
       <div className="flex flex-auto">
@@ -155,7 +158,12 @@ export default class Register extends Component {
         <div className="w-full h-screen justify-center bg-bookmark-grey" >
           <div className="col-md-12">
             <div className="card card-container bg-white">
-              <h4 className="font-normal">Registre-se</h4>
+              <h4 className="font-normal">
+                <Translation>
+                  {
+                    t => <>{t("register")}</>
+                  }
+                </Translation></h4>
 
 
               <Form
@@ -167,7 +175,12 @@ export default class Register extends Component {
                 {!this.state.successful && (
                   <div>
                     <div className="form-group">
-                      <label htmlFor="username">Username</label>
+                      <label htmlFor="username">
+                        <Translation>
+                          {
+                            t => <>{t("user")}</>
+                          }
+                        </Translation></label>
                       <Input
                         type="text"
                         className="form-control"
@@ -179,14 +192,24 @@ export default class Register extends Component {
                     </div>
 
                     <div className="form-group mb-0 mt-3">
-                      <label htmlFor="username">Nome Completo</label>
+                      <label htmlFor="username">                 
+                       <Translation>
+                    {
+                      t => <>{t("name")}</>
+                    }
+                  </Translation></label>
                       <Input
                         type="text"
                         className="form-control"
                         name="name"
                       />
                     </div>
-                    <span className="text-xs">Conforme indicado no seu documento de identidade</span>
+                    <span className="text-xs">
+                    <Translation>
+                    {
+                      t => <>{t("namet")}</>
+                    }
+                  </Translation></span>
 
 
                     <div className="form-group ">
@@ -201,7 +224,12 @@ export default class Register extends Component {
                       />
                     </div>
 
-                    <p className="mb-2">Número de celular</p>
+                    <p className="mb-2">                  
+                    <Translation>
+                    {
+                      t => <>{t("phone")}</>
+                    }
+                  </Translation></p>
                     <PhoneInput
                       className="mb-4 mt-0"
                       country={"br"}
@@ -210,7 +238,12 @@ export default class Register extends Component {
                     />
 
                     <div className="form-group containerIMG mb-0">
-                      <label htmlFor="password">Password</label>
+                      <label htmlFor="password">                  
+                      <Translation>
+                    {
+                      t => <>{t("password")}</>
+                    }
+                  </Translation></label>
                       <div className="containerImg">
                         <Input
                           type={passwordShown ? "text" : "password"}
@@ -226,16 +259,22 @@ export default class Register extends Component {
                           onClick={() => this.setState({ passwordShown: !this.state.passwordShown })}
                         />
                       </div>
-                      
+
                     </div>
-                    <span className="text-xs">A senha deve ter entre 6 e 40 caracteres.</span>
+                    <span className="text-xs">                  
+                    <Translation>
+                    {
+                      t => <>{t("passLen")}</>
+                    }
+                  </Translation></span>
+                  <br></br>
+                  <br></br>
 
-
-                    <ReCAPTCHA className="mb-2 mt-2"
-                      sitekey="."
-                      onChange={this.onChange} />
-
-                    <p className="text-xs">Ao se cadastrar, você concorda com os <Link to="*" >Termos de Serviço</Link> e a <Link to="*">Política de Privacidade</Link> da AupaMatch.</p>
+                    <p className="text-xs"><Translation>
+                    {
+                      t => <>{t("terms")}</>
+                    }
+                  </Translation></p>
 
                     <div className="form-group">
                       <button
@@ -245,7 +284,11 @@ export default class Register extends Component {
                         {this.state.loading && (
                           <span className="spinner-border spinner-border-sm"></span>
                         )}
-                        <span>Registre-se</span>
+                        <span><Translation>
+                    {
+                      t => <>{t("register")}</>
+                    }
+                  </Translation></span>
                       </button>
                     </div>
                   </div>
@@ -274,7 +317,15 @@ export default class Register extends Component {
               </Form>
 
               <p class="mt-1 text-xs font-light text-gray-500">
-                Já está cadastrado?<Link to="/login" class="ml-1 font-medium text-blue-400">Faça login</Link>
+              <Translation>
+                    {
+                      t => <>{t("registred")}</>
+                    }
+                  </Translation><Link to="/login" class="ml-1 font-medium text-blue-400"><Translation>
+                    {
+                      t => <>{t("login")}</>
+                    }
+                  </Translation></Link>
               </p>
             </div>
           </div>
