@@ -10,7 +10,9 @@ import hidePwdImg from "../assets/hide-password.svg"
 
 import AuthService from "../services/auth.service";
 
+import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/high-res.css'
+import ReCAPTCHA from "react-google-recaptcha"
 
 import { Translation } from "react-i18next"
 
@@ -34,6 +36,16 @@ const email = value => {
   }
 };
 
+const vusername = value => {
+  if (value.length < 3 || value.length > 20) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        The username must be between 3 and 20 characters.
+      </div>
+    );
+  }
+};
+
 const vpassword = value => {
   if (value.length < 6 || value.length > 40) {
     return (
@@ -50,13 +62,11 @@ export default class Register extends Component {
     this.handleRegister = this.handleRegister.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
-    this.onChangeName = this.onChangeName.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
 
     this.state = {
       currentUser: undefined,
       username: "",
-      name: "",
       email: "",
       password: "",
       loading: false,
@@ -77,12 +87,6 @@ export default class Register extends Component {
   onChangeUsername(e) {
     this.setState({
       username: e.target.value
-    });
-  }
-
-  onChangeName(e) {
-    this.setState({
-      name: e.target.value
     });
   }
 
@@ -113,9 +117,7 @@ export default class Register extends Component {
       AuthService.register(
         this.state.username,
         this.state.email,
-        this.state.password,
-        this.state.name,
-        this.state.phone
+        this.state.password
       ).then(
         response => {
           this.setState({
@@ -172,49 +174,76 @@ export default class Register extends Component {
               >
                 {!this.state.successful && (
                   <div>
-                    <div className="form-group mb-0 mt-3">
-                      <label htmlFor="username" className="font-medium text-sm">                 
+                    <div className="form-group">
+                      <label htmlFor="username" className="font-medium text-sm">
                         <Translation>
                           {
-                            t => <>{t("name")}</>
+                            t => <>{t("user")}</>
                           }
-                        </Translation>
-                      </label>
+                        </Translation></label>
+                      <Input
+                        type="text"
+                        className="form-control"
+                        name="username"
+                        value={this.state.username}
+                        onChange={this.onChangeUsername}
+                        validations={[required, vusername]}
+                      />
+                    </div>
+
+                    <div className="form-group mb-0 mt-3">
+                      <label htmlFor="username" className="font-medium text-sm">                 
+                       <Translation>
+                    {
+                      t => <>{t("name")}</>
+                    }
+                  </Translation></label>
                       <Input
                         type="text"
                         className="form-control"
                         name="name"
-                        value={this.state.name}
-                        onChange={this.onChangeName}
                       />
                     </div>
-                  <span className="text-xs">
+                    <span className="text-xs">
                     <Translation>
-                      {
-                        t => <>{t("namet")}</>
-                      }
-                    </Translation>
-                  </span>
+                    {
+                      t => <>{t("namet")}</>
+                    }
+                  </Translation></span>
 
-                  <div className="form-group">
-                    <label htmlFor="email" className="font-medium text-sm">Email</label>
-                    <Input
-                      type="text"
-                      className="form-control"
-                      name="email"
-                      value={this.state.email}
-                      onChange={this.onChangeEmail}
-                      validations={[required, email]}
+
+                    <div className="form-group">
+                      <label htmlFor="email" className="font-medium text-sm">Email</label>
+                      <Input
+                        type="text"
+                        className="form-control"
+                        name="email"
+                        value={this.state.email}
+                        onChange={this.onChangeEmail}
+                        validations={[required, email]}
+                      />
+                    </div>
+
+                    <p className="mb-2 font-medium text-sm">                  
+                    <Translation>
+                    {
+                      t => <>{t("phone")}</>
+                    }
+                  </Translation></p>
+                    <PhoneInput
+                      className="mb-4 mt-0"
+                      country={"br"}
+                      value={this.state.phone}
+                      onChange={phone => this.setState({ phone })}
                     />
-                  </div>
-                  <div className="form-group containerIMG mb-0">
+
+                    <div className="form-group containerIMG mb-0">
                       <label htmlFor="password" className="font-medium text-sm">                  
-                        <Translation>
-                          {
-                            t => <>{t("password")}</>
-                          }
-                        </Translation>
-                      </label>
+                      <Translation>
+                    {
+                      t => <>{t("password")}</>
+                    }
+                  </Translation></label>
                       <div className="containerImg">
                         <Input
                           type={passwordShown ? "text" : "password"}
@@ -230,43 +259,39 @@ export default class Register extends Component {
                           onClick={() => this.setState({ passwordShown: !this.state.passwordShown })}
                         />
                       </div>
-                  </div>
-                  <span className="text-xs">                  
+
+                    </div>
+                    <span className="text-xs">                  
                     <Translation>
-                      {
-                        t => <>{t("passLen")}</>
-                      }
-                    </Translation>
-                  </span>
+                    {
+                      t => <>{t("passLen")}</>
+                    }
+                  </Translation></span>
                   <br></br>
                   <br></br>
 
-                  <p className="text-xs">
-                    <Translation>
-                      {
-                        t => <>{t("terms")}</>
-                      }
-                    </Translation>
-                  </p>
+                    <p className="text-xs"><Translation>
+                    {
+                      t => <>{t("terms")}</>
+                    }
+                  </Translation></p>
 
-                  <div className="form-group">
-                    <button
+                    <div className="form-group">
+                      <button
                         className="w-100 whitespace-nowrap rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-600"
                         disabled={this.state.loading}
-                        >
+                      >
                         {this.state.loading && (
                           <span className="spinner-border spinner-border-sm"></span>
                         )}
-                        <span>
-                          <Translation>
-                            {
-                              t => <>{t("register")}</>
-                            }
-                          </Translation>
-                        </span>
-                    </button>
+                        <span><Translation>
+                    {
+                      t => <>{t("register")}</>
+                    }
+                  </Translation></span>
+                      </button>
+                    </div>
                   </div>
-                </div>
                 )}
 
                 {this.state.message && (
@@ -292,18 +317,15 @@ export default class Register extends Component {
               </Form>
 
               <p class="mt-1 text-xs font-light text-gray-500">
-                <Translation>
-                  {
-                    t => <>{t("registred")}</>
-                  }
-                </Translation>
-                <Link to="/login" class="ml-1 font-medium text-indigo-400 hover:text-indigo-500">
-                  <Translation>
+              <Translation>
+                    {
+                      t => <>{t("registred")}</>
+                    }
+                  </Translation><Link to="/login" class="ml-1 font-medium text-indigo-400 hover:text-indigo-500"><Translation>
                     {
                       t => <>{t("login")}</>
                     }
-                  </Translation>
-                </Link>
+                  </Translation></Link>
               </p>
             </div>
           </div>
