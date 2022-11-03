@@ -46,7 +46,7 @@ export default class Dashboard extends Component {
               {/* <!--Card 2--> */}
               <div class="rounded overflow-hidden shadow-lg min-h-[300px] max-h-[400px] bg-gray-100 col-span-3 xl:col-span-1  ">
                 <div class="px-6 py-4">
-                  <h3>Perfil de {currentUser.username}</h3>
+                  <h3>Perfil de {currentUser.name}</h3>
 
                   <hr></hr>
                   {(this.state.userReady) ?

@@ -28,9 +28,10 @@ class Login extends Component {
     this.handleLogin = this.handleLogin.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
 
     this.state = {
-      username: "",
+      email: "",
       password: "",
       loading: false,
       message: "",
@@ -53,6 +54,12 @@ class Login extends Component {
     });
   }
 
+  onChangeEmail(e) {
+    this.setState({
+      email: e.target.value
+    });
+  }
+
   onChangePassword(e) {
     this.setState({
       password: e.target.value
@@ -70,7 +77,7 @@ class Login extends Component {
     this.form.validateAll();
 
     if (this.checkBtn.context._errors.length === 0) {
-      AuthService.login(this.state.username, this.state.password).then(
+      AuthService.login(this.state.email, this.state.password).then(
         () => {
           this.props.router.navigate("/profile");
           window.location.reload();
@@ -114,19 +121,15 @@ class Login extends Component {
               }}
             >
               <div className="form-group">
-                <label htmlFor="username" className="font-medium text-sm">
-                  <Translation>
-                    {
-                      t => <>{t("user")}</>
-                    }
-                  </Translation>
+                <label htmlFor="email" className="font-medium text-sm">
+                  Email
                 </label>
                 <Input
-                  type="text"
+                  type="email"
                   className="form-control"
-                  name="username"
-                  value={this.state.username}
-                  onChange={this.onChangeUsername}
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.onChangeEmail}
                   validations={[required]}
                 />
               </div>

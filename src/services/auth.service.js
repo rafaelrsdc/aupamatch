@@ -3,10 +3,10 @@ import axios from "axios";
 const API_URL = "https://aupamatch-api2.onrender.com/api/auth/";
 
 class AuthService {
-  login(username, password) {
+  login(email, password) {
     return axios
       .post(API_URL + "signin", {
-        username,
+        email,
         password
       })
       .then(response => {
@@ -22,13 +22,11 @@ class AuthService {
     localStorage.removeItem("user");
   }
 
-  register(username, email, password, name, phone) {
+  register(name, email, password) {
     return axios.post(API_URL + "signup", {
-      username,
+      name,
       email,
       password,
-      name,
-      phone,
     });
   }
 

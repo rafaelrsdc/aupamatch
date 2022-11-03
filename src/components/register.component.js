@@ -4,6 +4,7 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 import { Link, Navigate } from "react-router-dom"
+import {FormControl, FormLabel, RadioGroup, FormControlLabel} from "react-bootstrap"
 
 import showPwdImg from "../assets/show-password.svg"
 import hidePwdImg from "../assets/hide-password.svg"
@@ -111,11 +112,9 @@ export default class Register extends Component {
 
     if (this.checkBtn.context._errors.length === 0) {
       AuthService.register(
-        this.state.username,
+        this.state.name,
         this.state.email,
         this.state.password,
-        this.state.name,
-        this.state.phone
       ).then(
         response => {
           this.setState({
@@ -173,7 +172,7 @@ export default class Register extends Component {
                 {!this.state.successful && (
                   <div>
                     <div className="form-group mb-0 mt-3">
-                      <label htmlFor="username" className="font-medium text-sm">                 
+                      <label htmlFor="name" className="font-medium text-sm">                 
                         <Translation>
                           {
                             t => <>{t("name")}</>
@@ -195,6 +194,10 @@ export default class Register extends Component {
                       }
                     </Translation>
                   </span>
+
+
+
+
 
                   <div className="form-group">
                     <label htmlFor="email" className="font-medium text-sm">Email</label>

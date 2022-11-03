@@ -80,7 +80,7 @@ class App extends Component {
                 <Nav className="ml-auto">
                   <Dropdown className="hidden lg:flex mr-16">
                     <Dropdown.Toggle variant="Secondary" id="dropdown-basic">
-                      {currentUser.username}
+                      {currentUser.name}
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       <Dropdown.Item href="/profile">Perfil</Dropdown.Item>
