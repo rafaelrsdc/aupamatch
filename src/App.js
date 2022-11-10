@@ -75,11 +75,13 @@ class App extends Component {
           <>
             <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
               <Navbar.Brand href="/">
-                <h3 className="ml-64">AupaMatch</h3>
+                <h3 className="sm:ml-64">AupaMatch</h3>
               </Navbar.Brand>
+
               <Navbar.Toggle aria-controls="responsive-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav">
-                <Nav className="ml-auto">  <div class="container flex flex-wrap justify-between items-center mx-auto">
+                <Nav className="ml-auto"> 
+                <div class="hidden md:flex flex-wrap justify-between items-center mx-auto">
                   <ul class="flex flex-col  md:flex-row ">
                     <li>
                       <a href="/dashboard" class="block pt-3 pr-4 pl-3 text-black hover:text-blue-700" aria-current="page">Dashboard</a>
@@ -99,18 +101,21 @@ class App extends Component {
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       <Dropdown.Item href="/profile">Perfil</Dropdown.Item>
-                      <Dropdown.Item href="/user">Configuraçõces</Dropdown.Item>
+                      <Dropdown.Item href="/user">Minhas Vagas</Dropdown.Item>
+                      <Dropdown.Item href="/user">Maches</Dropdown.Item>
                       <Dropdown.Divider />
                       <Dropdown.Item href="/home" onClick={this.logOut}>Sair</Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
                   <div className="lg:hidden">
-                    <Nav.Link href="/"><p>Dashboard</p></Nav.Link>
-                    <Nav.Link href="/busca"><p>Busca de Vaga</p></Nav.Link>
+                    <Nav.Link href="/dashboard"><p>Dashboard</p></Nav.Link>
+                    <Nav.Link href="/busca"><p>Minhas Vagas</p></Nav.Link>
+                    <Nav.Link href="/busca"><p>Matches</p></Nav.Link>
                     <Nav.Link href="/profile"><p>Perfil</p></Nav.Link>
                     <Nav.Link href="/user"><p>Configurações</p></Nav.Link>
                     <NavDropdown.Divider />
                     <Nav.Link href="/home" onClick={this.logOut}>Sair</Nav.Link>
+                    <NavDropdown.Divider />
                   </div>
                 </Nav>
               </Navbar.Collapse>
