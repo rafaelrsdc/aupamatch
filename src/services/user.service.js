@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const API_URL = 'https://aupamatch-api2.onrender.com/api/test/';
+const API_URL = 'http://localhost:8080/api/test/';
 
 class UserService {
   getPublicContent() {
@@ -22,6 +22,7 @@ class UserService {
 
   getVaga(user){
     return axios.get(API_URL + 'vaga', {
+      headers: authHeader(),
 
       params: {
         userID: user.id,
@@ -32,6 +33,7 @@ class UserService {
 
   deleteVaga(id){
     return axios.get(API_URL + 'del', {
+      headers: authHeader(),
       params: {
         vagaID: id,
       },

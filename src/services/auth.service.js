@@ -1,6 +1,7 @@
 import axios from "axios";
+import authHeader from './auth-header';
 
-const API_URL = "https://aupamatch-api2.onrender.com/api/auth/";
+const API_URL = "http://localhost:8080/api/auth/";
 
 class AuthService {
   login(email, password) {
@@ -33,6 +34,7 @@ class AuthService {
 
   criarVaga(escolaridade, experiencia, filhos, descricao, natacao, carro, habilitacao, id) {
     return axios.post(API_URL + "vaga", {
+      headers: authHeader(),
       escolaridade,
       experiencia,
       filhos,
