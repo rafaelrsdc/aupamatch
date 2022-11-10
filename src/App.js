@@ -101,8 +101,7 @@ class App extends Component {
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       <Dropdown.Item href="/profile">Perfil</Dropdown.Item>
-                      <Dropdown.Item href="/user">Minhas Vagas</Dropdown.Item>
-                      <Dropdown.Item href="/user">Maches</Dropdown.Item>
+                      <Dropdown.Item href="/user">Configurações</Dropdown.Item>
                       <Dropdown.Divider />
                       <Dropdown.Item href="/home" onClick={this.logOut}>Sair</Dropdown.Item>
                     </Dropdown.Menu>
