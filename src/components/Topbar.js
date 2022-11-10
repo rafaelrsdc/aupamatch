@@ -11,12 +11,12 @@ import {
   XMarkIcon
 } from '@heroicons/react/24/outline'
 import { useTranslation } from "react-i18next";
-import { Dropdown, DropdownToggle , Form} from 'react-bootstrap';
+
 
 import BRFLAG from "../assets/brasil-flag.svg"
 import USFLAG from "../assets/eua-flag.svg"
+import TranslationBar from "./TranslationBar";
 
-import i18n from "../i18n"
 
 const styles = {
   container: isZIndex => ({
@@ -76,11 +76,8 @@ export default function Topbar() {
               </a>
             </Link>
           </div>
-          <div className="flex w-10 mr-4">
-          <img src={BRFLAG} className="mr-1" alt="my image" onClick={changeLanguage("pt")}/>
-            <img src={USFLAG} className="ml-1" alt="my image" onClick={changeLanguage("en")}/>
-                 
-          </div>
+          <TranslationBar />
+
         </div>
         
       </div>

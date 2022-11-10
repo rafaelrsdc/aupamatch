@@ -15,6 +15,7 @@ import BoardUser from "./components/board-user.component";
 import BoardModerator from "./components/board-moderator.component";
 import BoardAdmin from "./components/board-admin.component";
 
+
 // import AuthVerify from "./common/auth-verify";
 import EventBus from "./common/EventBus";
 import Busca from "./components/busca.component";
@@ -22,6 +23,7 @@ import Dashboard from "./components/Dashboard";
 import Topbar from "./components/Topbar";
 import Footer from "./components/Footer";
 import Section from "./components/Section";
+import TranslationBar from "./components/TranslationBar";
 
 class App extends Component {
   constructor(props) {
@@ -99,6 +101,9 @@ class App extends Component {
                   </div>
                 </Nav>
               </Navbar.Collapse>
+              <div className="mr-5"><TranslationBar /></div>
+             
+              
             </Navbar>
           </>
           // Se não estiver logado
