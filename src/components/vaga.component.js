@@ -12,6 +12,7 @@ export default class Vaga extends Component {
     this.state = {
       content: [],
       currentIndex: -1,
+      family: true
     };
   }
 
@@ -27,6 +28,8 @@ export default class Vaga extends Component {
 
   componentDidMount() {
     const currentUser = AuthService.getCurrentUser();
+
+    if (currentUser.roles.toString() !== "ROLE_FAMILY") this.setState({ family: false  });
 
     UserService.getVaga(currentUser).then(
       response => {

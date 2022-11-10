@@ -45,7 +45,7 @@ export default class Dashboard extends Component {
     const data = this.props
     return (
 
-      <Col xs={8} md={8} lg={3} key={data.id} >
+      <Col xs={8} md={8} lg={4} key={data.id} >
         <Card style={{ width: '20rem' }} onClick={() => this.setState({ show: true }) }>
           <Card.Header>
             <Card.Title>
