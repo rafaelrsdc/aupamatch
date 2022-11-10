@@ -82,9 +82,6 @@ export default class Dashboard extends Component {
           loading: false
         });
       },
-      setTimeout(function () {
-        window.location.reload(1);
-      }, 3000),
       error => {
         const resMessage =
           (error.response &&
