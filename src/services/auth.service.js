@@ -22,11 +22,25 @@ class AuthService {
     localStorage.removeItem("user");
   }
 
-  register(name, email, password) {
+  register(name, email, password, roles) {
     return axios.post(API_URL + "signup", {
       name,
       email,
       password,
+      roles,
+    });
+  }
+
+  criarVaga(escolaridade, experiencia, filhos, descricao, natacao, carro, habilitacao, id) {
+    return axios.post(API_URL + "vaga", {
+      escolaridade,
+      experiencia,
+      filhos,
+      descricao,
+      natacao,
+      carro,
+      habilitacao,
+      id
     });
   }
 

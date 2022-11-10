@@ -19,6 +19,24 @@ class UserService {
   getAdminBoard() {
     return axios.get(API_URL + 'admin', { headers: authHeader() });
   }
+
+  getVaga(user){
+    return axios.get(API_URL + 'vaga', {
+
+      params: {
+        userID: user.id,
+        roles: user.roles.toString()
+      },
+    });
+  }
+
+  deleteVaga(id){
+    return axios.get(API_URL + 'del', {
+      params: {
+        vagaID: id,
+      },
+    });
+  }
 }
 
 export default new UserService();
