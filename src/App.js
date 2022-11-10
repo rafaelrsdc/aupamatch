@@ -24,6 +24,8 @@ import Topbar from "./components/Topbar";
 import Footer from "./components/Footer";
 import Section from "./components/Section";
 import TranslationBar from "./components/TranslationBar";
+import MinhasVagas from "./components/cadastroevagas";
+import Matches from "./components/matches.component";
 
 class App extends Component {
   constructor(props) {
@@ -74,36 +76,51 @@ class App extends Component {
         {currentUser ? (
           <>
             <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
-              <Navbar.Brand href="#home">
-                <h3>AupaMatch</h3>
+              <Navbar.Brand href="/">
+                <h3 className="sm:ml-64">AupaMatch</h3>
               </Navbar.Brand>
+
               <Navbar.Toggle aria-controls="responsive-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav">
-                <Nav className="ml-auto">
+                <Nav className="ml-auto"> 
+                <div class="hidden md:flex flex-wrap justify-between items-center mx-auto">
+                  <ul class="flex flex-col  md:flex-row ">
+                    <li>
+                      <a href="/dashboard" class="block pt-3 pr-4 pl-3 text-black hover:text-blue-700" aria-current="page">Dashboard</a>
+                    </li>
+                    
+
+                    <li>
+                      <a href="/dashboard/matches" class="block pt-3 pr-4 pl-3 text-black rounded hover:text-blue-700">Matchs</a>
+                    </li>
+                  </ul>
+                </div>
                   <Dropdown className="hidden lg:flex mr-16">
                     <Dropdown.Toggle variant="Secondary" id="dropdown-basic">
                       {currentUser.name}
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       <Dropdown.Item href="/profile">Perfil</Dropdown.Item>
-                      <Dropdown.Item href="/user">Configuraçõces</Dropdown.Item>
+                      <Dropdown.Item href="/user">Configurações</Dropdown.Item>
                       <Dropdown.Divider />
                       <Dropdown.Item href="/home" onClick={this.logOut}>Sair</Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
                   <div className="lg:hidden">
-                    <Nav.Link href="/"><p>Dashboard</p></Nav.Link>
-                    <Nav.Link href="/busca"><p>Busca de Vaga</p></Nav.Link>
+                    <Nav.Link href="/dashboard"><p>Dashboard</p></Nav.Link>
+                    <Nav.Link href="/busca"><p>Minhas Vagas</p></Nav.Link>
+                    <Nav.Link href="/dashboard/matches"><p>Matches</p></Nav.Link>
                     <Nav.Link href="/profile"><p>Perfil</p></Nav.Link>
                     <Nav.Link href="/user"><p>Configurações</p></Nav.Link>
                     <NavDropdown.Divider />
                     <Nav.Link href="/home" onClick={this.logOut}>Sair</Nav.Link>
+                    <NavDropdown.Divider />
                   </div>
                 </Nav>
               </Navbar.Collapse>
-              <div className="mr-5"><TranslationBar /></div>
-             
-              
+              <div className="mr-64"><TranslationBar /></div>
+
+
             </Navbar>
           </>
           // Se não estiver logado
@@ -117,12 +134,16 @@ class App extends Component {
         <div className="">
           <Routes>
 
-            <Route path="/home" element={<Section />} />
+            <Route path="/dashboard" element={<Dashboard />} >
+              <Route index element={<MinhasVagas />} />
+              <Route path="matches" element={<Matches />} />
+            </Route >
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/busca" element={<Busca />} />
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<Section />} />
+            <Route path="/home" element={<Section />} />
             <Route path="/user" element={<BoardUser />} />
             <Route path="/mod" element={<BoardModerator />} />
             <Route path="/admin" element={<BoardAdmin />} />

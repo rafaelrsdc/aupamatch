@@ -1,13 +1,16 @@
 import React, { Component } from "react";
-import { Navigate, Link } from "react-router-dom";
+import { Navigate, Link, Outlet } from "react-router-dom";
 import AuthService from "../services/auth.service";
+import { Routes, Route } from "react-router-dom";
 import BoardUser from "./board-user.component";
+
 
 import Navbar from "./Navbar";
 import Button from 'react-bootstrap/Button';
 import { Card, CardGroup, Col, Row, Modal, Form } from 'react-bootstrap/';
 import RegisterVaga from "./register-vaga.component";
 import Vaga from "./vaga.component";
+import MinhasVagas from "./cadastroevagas";
 
 
 export default class Dashboard extends Component {
@@ -18,9 +21,6 @@ export default class Dashboard extends Component {
       redirect: null,
       userReady: false,
       currentUser: { name: "" },
-      show: false,
-      setShow: false,
-      family: true,
     };
   }
 
@@ -30,6 +30,7 @@ export default class Dashboard extends Component {
 
     if (currentUser.roles.toString() !== "ROLE_FAMILY") this.setState({ family: false  });
     if (!currentUser) this.setState({ redirect: "/home" });
+
     this.setState({ currentUser: currentUser, userReady: true })
   
   }
@@ -39,48 +40,18 @@ export default class Dashboard extends Component {
     if (this.state.redirect) {
       return <Navigate to={this.state.redirect} />
     }
-
-
-    const { currentUser, show, family } = this.state;
+    const { currentUser} = this.state;
 
     return (
 
       <div className="flex flex-auto">
         <div className="flex flex-auto h-full w-full bg-neutral-200">
-          <section className="mt-2 lg:ml-10 xl:mr-10 w-full h-4/5"><h1 className="">Dashboard</h1>
+          <section className="mt-2 lg:ml-64 xl:mr-64 w-full h-4/5"><h1 className="">Dashboard</h1>
             <div class=" grid grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-5 min-h-full ">
               {/* <!--Card 1--> */}
               <div class="rounded overflow-hidden shadow-lg min-h-[1000px] bg-gray-100 p-4 col-span-3 row-span-2">
-                {family && <Button variant="primary" onClick={() => this.setState({ show: true })}>
-                  Cadastrar uma Vaga
-                </Button> }
                 
-
-                <Modal
-                  show={show}
-                  onHide={() => this.setState({ show: false })}
-                  dialogClassName="modal-90w"
-                  aria-labelledby="example-custom-modal-styling-title"
-                >
-                  <Modal.Header closeButton>
-                    <Modal.Title id="example-custom-modal-styling-title">
-                      Cadastrar uma Vaga
-                    </Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <RegisterVaga />
-                  </Modal.Body>
-                </Modal>
-
-                {family ? <><hr></hr>
-                <h2>Minhas Vagas</h2></> : <h2>Vagas Disponíveis</h2> }
-                
-                <span class="hidden ">
-                  <BoardUser /></span>
-
-                <Vaga />
-
-
+                <Outlet />
               </div>
 
 
@@ -133,7 +104,11 @@ export default class Dashboard extends Component {
             </div>
           </section>
         </div>
+
+        <div className="">
+        </div>
       </div>
     );
+
   }
 }

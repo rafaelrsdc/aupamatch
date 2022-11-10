@@ -193,7 +193,6 @@ export default class RegisterVaga extends Component {
             successful: true,
             loading: false
           });
-          window.location.reload(false);
         },
         error => {
           const resMessage =
@@ -208,7 +207,10 @@ export default class RegisterVaga extends Component {
             message: resMessage,
             loading: false
           });
-        }
+        },
+        setTimeout(function(){
+          window.location.reload(1);
+       }, 2000),
       );
     } else {
       this.setState({

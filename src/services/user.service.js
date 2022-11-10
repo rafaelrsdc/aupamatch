@@ -39,6 +39,26 @@ class UserService {
       },
     });
   }
+
+  match(vagaID, aupairID){
+    return axios.get(API_URL + 'match', {
+      headers: authHeader(),
+      params: {
+        vagaID: vagaID,
+        aupairID: aupairID,
+      },
+    });
+  }
+
+  findmatches(user){
+    return axios.get(API_URL + 'matches', {
+      headers: authHeader(),
+      params: {
+        id : user.id,
+        roles: user.roles.toString()
+      },
+    });
+  }
 }
 
 export default new UserService();
