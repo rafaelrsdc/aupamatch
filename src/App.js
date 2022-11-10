@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+import "./styles/App.css";
 import { Dropdown, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
 
@@ -15,11 +15,15 @@ import BoardUser from "./components/board-user.component";
 import BoardModerator from "./components/board-moderator.component";
 import BoardAdmin from "./components/board-admin.component";
 
+
 // import AuthVerify from "./common/auth-verify";
 import EventBus from "./common/EventBus";
 import Busca from "./components/busca.component";
 import Dashboard from "./components/Dashboard";
 import Topbar from "./components/Topbar";
+import Footer from "./components/Footer";
+import Section from "./components/Section";
+import TranslationBar from "./components/TranslationBar";
 
 class App extends Component {
   constructor(props) {
@@ -39,8 +43,8 @@ class App extends Component {
     if (user) {
       this.setState({
         currentUser: user,
-        showModeratorBoard: user.groups.includes("ROLE_MODERATOR"),
-        showAdminBoard: user.groups.includes("ROLE_ADMIN"),
+        showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
+        showAdminBoard: user.roles.includes("ROLE_ADMIN"),
       });
     }
 
@@ -67,7 +71,6 @@ class App extends Component {
     return (
       <div>
 
-
         {currentUser ? (
           <>
             <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -79,7 +82,7 @@ class App extends Component {
                 <Nav className="ml-auto">
                   <Dropdown className="hidden lg:flex mr-16">
                     <Dropdown.Toggle variant="Secondary" id="dropdown-basic">
-                      {currentUser.username}
+                      {currentUser.name}
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       <Dropdown.Item href="/profile">Perfil</Dropdown.Item>
@@ -96,19 +99,17 @@ class App extends Component {
                     <NavDropdown.Divider />
                     <Nav.Link href="/home" onClick={this.logOut}>Sair</Nav.Link>
                   </div>
-
-
-
-
                 </Nav>
               </Navbar.Collapse>
+              <div className="mr-5"><TranslationBar /></div>
+             
+              
             </Navbar>
           </>
           // Se não estiver logado
         ) : (
           <>
             <Topbar />
-
           </>
         )}
 
@@ -116,7 +117,7 @@ class App extends Component {
         <div className="">
           <Routes>
 
-            <Route path="/home" element={<Home />} />
+            <Route path="/home" element={<Section />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
@@ -127,6 +128,8 @@ class App extends Component {
             <Route path="/admin" element={<BoardAdmin />} />
           </Routes>
         </div>
+
+        <Footer />
 
         {/* <AuthVerify logOut={this.logOut}/> */}
       </div>

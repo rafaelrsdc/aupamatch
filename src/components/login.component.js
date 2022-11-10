@@ -1,13 +1,16 @@
-import React, { Component} from "react";
+import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import { Link, Navigate} from "react-router-dom"
-
+import { Link, Navigate } from "react-router-dom"
 import AuthService from "../services/auth.service";
-
 import { withRouter } from '../common/with-router';
-import Navbar from "./Navbar";
+
+import { Translation } from "react-i18next"
+
+import showPwdImg from "../assets/show-password.svg"
+import hidePwdImg from "../assets/hide-password.svg"
+
 
 const required = value => {
   if (!value) {
@@ -25,16 +28,17 @@ class Login extends Component {
     this.handleLogin = this.handleLogin.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
 
     this.state = {
-      username: "",
+      email: "",
       password: "",
       loading: false,
       message: "",
       currentUser: undefined,
     };
   }
-  
+
   componentDidMount() {
     const user = AuthService.getCurrentUser();
 
@@ -47,6 +51,12 @@ class Login extends Component {
   onChangeUsername(e) {
     this.setState({
       username: e.target.value
+    });
+  }
+
+  onChangeEmail(e) {
+    this.setState({
+      email: e.target.value
     });
   }
 
@@ -67,7 +77,7 @@ class Login extends Component {
     this.form.validateAll();
 
     if (this.checkBtn.context._errors.length === 0) {
-      AuthService.login(this.state.username, this.state.password).then(
+      AuthService.login(this.state.email, this.state.password).then(
         () => {
           this.props.router.navigate("/");
           window.location.reload();
@@ -95,26 +105,15 @@ class Login extends Component {
 
   render() {
     const { currentUser } = this.state;
+    const { t } = this.props
     return (
-
       <div className="flex flex-auto">
-        {currentUser ? (<Navigate to="/profile"/>
+        {currentUser ? (<Navigate to="/profile" />
 
-          ) : (<div></div>)}
-        <div className="hidden 2xl:flex fixed top-0 left-0 w-56 shadow-md bg-white h-full border-r bg-black">
-          <div className="w-56 h-screen px-4 py-4 text-2xl font-semibold  bold text-center text-bold">
-            <Link to="/home" style={{textDecoration: 'none'}} >
-              <p className='text-black'>
-                AupaMatch
-              </p></Link>
-          </div>
-        </div>
-      
-        <div className="w-full h-screen justify-center bg-bookmark-grey" >
+        ) : (<div></div>)}
+
+        <div className="w-full h-screen justify-center bg-gray-50 border-b-2 border-gray-100" >
           <div className="card card-container bg-white">
-            <p className=" text-2xl">Faça Login em sua conta</p>
-
-
             <Form
               onSubmit={this.handleLogin}
               ref={c => {
@@ -122,19 +121,26 @@ class Login extends Component {
               }}
             >
               <div className="form-group">
-                <label htmlFor="username">Usuário</label>
+                <label htmlFor="email" className="font-medium text-sm">
+                  Email
+                </label>
                 <Input
-                  type="text"
+                  type="email"
                   className="form-control"
-                  name="username"
-                  value={this.state.username}
-                  onChange={this.onChangeUsername}
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.onChangeEmail}
                   validations={[required]}
                 />
               </div>
 
-              <div className="form-group">
-                <label htmlFor="password">Senha</label>
+              <div className="form-group mb-1">
+                <label htmlFor="password" className="font-medium text-sm">
+                  <Translation>
+                    {
+                      t => <>{t("password")}</>
+                    }
+                  </Translation></label>
                 <Input
                   type="password"
                   className="form-control"
@@ -145,15 +151,30 @@ class Login extends Component {
                 />
               </div>
 
+              <div class="text-sm mb-4">
+                <a href="#" class="font-medium text-indigo-400 hover:text-indigo-500">
+                <Translation>
+                    {
+                      t => <>{t("forgot")}</>
+                    }
+                  </Translation>
+                </a>
+              </div>
+
               <div className="form-group">
                 <button
-                  className="btn btn-primary btn-block"
+                  className="w-100 whitespace-nowrap rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-600"
                   disabled={this.state.loading}
                 >
                   {this.state.loading && (
-                    <span className="spinner-border spinner-border-sm"></span>
+                    <span className="spinner-border spinner-border-sm mr-2"></span>
                   )}
-                  <span>Entrar</span>
+                  <span>
+                    <Translation>
+                      {
+                        t => <>{t('login')}</>
+                      }
+                    </Translation></span>
                 </button>
               </div>
 
@@ -171,10 +192,18 @@ class Login extends Component {
                 }}
               />
 
-          <p class="mt-3 text-xs font-light text-gray-500">
-            Não tem conta?<Link to="/register" class="ml-1 font-medium text-blue-400">Faça Cadastro</Link>
-            </p>
-
+              <p class="mt-3 text-xs text-center font-light text-gray-500">
+                
+              <Translation>
+                      {
+                        t => <>{t('noACC')}</>
+                      }
+                    </Translation><Link to="/register" class="ml-1 font-medium text-indigo-400 hover:text-indigo-500"><Translation>
+                      {
+                        t => <>{t('register')}</>
+                      }
+                    </Translation></Link>
+              </p>
             </Form>
           </div>
         </div>
