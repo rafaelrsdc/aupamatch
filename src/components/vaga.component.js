@@ -50,16 +50,16 @@ export default class Vaga extends Component {
         if (error.response && error.response.status === 401) {
           EventBus.dispatch("logout");
         }
-      }
+      },
     );
   }
 
   render() {
 
     const { content, currentIndex } = this.state;
-    console.log(content)
     return (
       <div >
+        {console.log("contnet é " + content)}
 
         <div className='row-wrapper'>
           <Row>

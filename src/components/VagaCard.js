@@ -17,7 +17,9 @@ export default class Dashboard extends Component {
       show: false,
       setShow: false,
       data: this.props,
-    
+      loading: false,
+      successful: false,
+      message: "",
     };
   }
 
@@ -34,19 +36,43 @@ export default class Dashboard extends Component {
   }
 
 
-  deleteVaga() {    
-    userService.deleteVaga(this.state.data._id)
-    window.location.reload(false);
+  deleteVaga() {
+    userService.deleteVaga(this.state.data._id).then(
+      response => {
+        this.setState({
+          message: response.data.message,
+          successful: true,
+          loading: false
+        });
+      },
+      setTimeout(function () {
+        window.location.reload(1);
+      }, 1000),
+      error => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        this.setState({
+          successful: false,
+          message: resMessage,
+          loading: false
+        });
+      }
+    )
   }
 
 
   render() {
-    const { show , family} = this.state;
+    const { show, family } = this.state;
     const data = this.props
     return (
 
       <Col xs={8} md={8} lg={4} key={data.id} >
-        <Card style={{ width: '20rem' }} onClick={() => this.setState({ show: true }) }>
+        <Card style={{ width: '20rem' }} onClick={() => this.setState({ show: true })}>
           <Card.Header>
             <Card.Title>
               Vaga para {data.filhos} {(data.filhos) === "01" ? <span>filho</span> : <span>filhos</span>}
@@ -61,6 +87,8 @@ export default class Dashboard extends Component {
 
           </Card.Body>
         </Card>
+
+
         <Modal
           show={show}
           onHide={() => this.setState({ show: false })}
@@ -73,28 +101,53 @@ export default class Dashboard extends Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <div className="w-full h-full justify-center bg-gray-50 border-b-2 border-gray-100" >
+              <div className="col-md-12">
+                <div className="card card-container bg-white">
+                  {!this.state.successful && (
+                    <div>
+                      <p>Escolaridade: {data.escolaridade}</p>
+                      <p>Experiência: {data.experiencia}</p>
+                      <p>Filhos: {data.filhos}</p>
+                      <p>Descrição: {data.descricao}</p>
+                      <p>Natação: {data.natacao ? <span>Sim</span> : <span>Não</span>}</p>
+                      <p>Habilitação: {data.habilitacao ? <span>Sim</span> : <span>Não</span>}</p>
+                      <p>Carro: {data.carro ? <span>Sim</span> : <span>Não</span>}</p>
 
-            <p>Escolaridade: {data.escolaridade}</p>
-            <p>Experiência: {data.experiencia}</p>
-            <p>Filhos: {data.filhos}</p>
-            <p>Descrição: {data.descricao}</p>
-            <p>Natação: {data.natacao ? <span>Sim</span> : <span>Não</span>}</p>
-            <p>Habilitação: {data.habilitacao ? <span>Sim</span> : <span>Não</span>}</p>
-            <p>Carro: {data.carro ? <span>Sim</span> : <span>Não</span>}</p>
 
+                      {family ? <h3><button
+                        className="badge badge-danger mr-2"
+                        onClick={this.deleteVaga}
+                      >
+                        Deletar
+                      </button></h3> : <h5><button
+                        className="badge badge-primary  mr-2"
+                        onClick={this.Candidatar}
+                      >
+                        Candidatar-se
+                      </button></h5>}
 
-            {family ?                        <h3><button
-              className="badge badge-danger mr-2"
-              onClick={this.deleteVaga}
-            >
-              Deletar
-            </button></h3> :            <h5><button
-              className="badge badge-primary  mr-2"
-              onClick={this.Candidatar}
-            >
-              Candidatar-se
-            </button></h5>}
+                    </div>
 
+                  )}
+
+                  {this.state.message && (
+                    <div className="form-group">
+                      <div
+                        className={
+                          this.state.successful
+                            ? "alert alert-success"
+                            : "alert alert-danger"
+                        }
+                        role="alert"
+                      >
+                        {this.state.message}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
           </Modal.Body>
         </Modal>
       </Col>
