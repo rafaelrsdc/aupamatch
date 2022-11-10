@@ -24,6 +24,8 @@ import Topbar from "./components/Topbar";
 import Footer from "./components/Footer";
 import Section from "./components/Section";
 import TranslationBar from "./components/TranslationBar";
+import MinhasVagas from "./components/cadastroevagas";
+import Matches from "./components/matches.component";
 
 class App extends Component {
   constructor(props) {
@@ -86,12 +88,10 @@ class App extends Component {
                     <li>
                       <a href="/dashboard" class="block pt-3 pr-4 pl-3 text-black hover:text-blue-700" aria-current="page">Dashboard</a>
                     </li>
-                    {(currentUser.roles.toString() === "ROLE_FAMILY") &&                     <li>
-                      <a href="#" class="block pt-3 pr-4 pl-3 text-black hover:text-blue-700">Minhas vagas</a>
-                    </li>}
+                    
 
                     <li>
-                      <a href="" class="block pt-3 pr-4 pl-3 text-black rounded hover:text-blue-700">Matchs</a>
+                      <a href="/dashboard/matches" class="block pt-3 pr-4 pl-3 text-black rounded hover:text-blue-700">Matchs</a>
                     </li>
                   </ul>
                 </div>
@@ -109,7 +109,7 @@ class App extends Component {
                   <div className="lg:hidden">
                     <Nav.Link href="/dashboard"><p>Dashboard</p></Nav.Link>
                     <Nav.Link href="/busca"><p>Minhas Vagas</p></Nav.Link>
-                    <Nav.Link href="/busca"><p>Matches</p></Nav.Link>
+                    <Nav.Link href="/dashboard/matches"><p>Matches</p></Nav.Link>
                     <Nav.Link href="/profile"><p>Perfil</p></Nav.Link>
                     <Nav.Link href="/user"><p>Configurações</p></Nav.Link>
                     <NavDropdown.Divider />
@@ -134,7 +134,10 @@ class App extends Component {
         <div className="">
           <Routes>
 
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard" element={<Dashboard />} >
+              <Route index element={<MinhasVagas />} />
+              <Route path="matches" element={<Matches />} />
+            </Route >
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />

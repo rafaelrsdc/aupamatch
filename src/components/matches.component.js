@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { Row } from "react-bootstrap"
+import {Row} from "react-bootstrap"
 import UserService from "../services/user.service";
 import EventBus from "../common/EventBus";
 import AuthService from "../services/auth.service";
 import VagaCard from "./VagaCard";
 
-export default class Vaga extends Component {
+
+export default class Matches extends Component {
   constructor(props) {
     super(props);
 
@@ -13,7 +14,8 @@ export default class Vaga extends Component {
       content: [],
       currentIndex: -1,
       family: true,
-      successful:false
+      successful: false,
+      message: ""
     };
   }
 
@@ -30,13 +32,14 @@ export default class Vaga extends Component {
   componentDidMount() {
     const currentUser = AuthService.getCurrentUser();
 
-    if (currentUser.roles.toString() !== "ROLE_FAMILY") this.setState({ family: false });
+    if (currentUser.roles.toString() !== "ROLE_FAMILY") this.setState({ family: false  });
 
-    UserService.getVaga(currentUser).then(
+    UserService.findmatches(currentUser).then(
       response => {
         this.setState({
           content: response.data,
-          successful: true
+          message: response.data.message,
+          successful: true,
         });
       },
       error => {
@@ -58,9 +61,11 @@ export default class Vaga extends Component {
 
   render() {
 
-    const { content, currentIndex } = this.state;
+    const { content, currentIndex} = this.state;
     return (
       <div>
+        <h1>Matches</h1>
+        <hr></hr>
         {this.state.successful && (
           <div >
             {console.log("contnet é " + content)}
@@ -93,8 +98,6 @@ export default class Vaga extends Component {
           </div>
         )}
       </div>
-
-
     );
   }
 }

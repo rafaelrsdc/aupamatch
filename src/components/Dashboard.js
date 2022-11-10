@@ -1,14 +1,16 @@
 import React, { Component } from "react";
-import { Navigate, Link } from "react-router-dom";
+import { Navigate, Link, Outlet } from "react-router-dom";
 import AuthService from "../services/auth.service";
+import { Routes, Route } from "react-router-dom";
 import BoardUser from "./board-user.component";
+
 
 import Navbar from "./Navbar";
 import Button from 'react-bootstrap/Button';
 import { Card, CardGroup, Col, Row, Modal, Form } from 'react-bootstrap/';
 import RegisterVaga from "./register-vaga.component";
 import Vaga from "./vaga.component";
-import MinhasVagas from "./MinhasVagas";
+import MinhasVagas from "./cadastroevagas";
 
 
 export default class Dashboard extends Component {
@@ -49,7 +51,7 @@ export default class Dashboard extends Component {
               {/* <!--Card 1--> */}
               <div class="rounded overflow-hidden shadow-lg min-h-[1000px] bg-gray-100 p-4 col-span-3 row-span-2">
                 
-                <MinhasVagas />
+                <Outlet />
               </div>
 
 
@@ -102,7 +104,11 @@ export default class Dashboard extends Component {
             </div>
           </section>
         </div>
+
+        <div className="">
+        </div>
       </div>
     );
+
   }
 }

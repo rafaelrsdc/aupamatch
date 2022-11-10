@@ -5,12 +5,11 @@ import AuthService from "../services/auth.service"
 
 import userService from "../services/user.service";
 
-
-
 export default class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.deleteVaga = this.deleteVaga.bind(this);
+    this.match = this.match.bind(this);
 
     this.state = {
       family: true,
@@ -20,12 +19,22 @@ export default class Dashboard extends Component {
       loading: false,
       successful: false,
       message: "",
+      pathmatch:true,
     };
   }
 
   componentDidMount() {
     const user = AuthService.getCurrentUser();
 
+    const pathname = window.location.pathname;
+
+    if(pathname === "/dashboard/matches")
+    {
+      this.setState({
+        pathmatch: false
+      });
+      
+    }
     if (user.roles.toString() !== "ROLE_FAMILY") this.setState({ family: false });
 
     if (user) {
@@ -34,7 +43,6 @@ export default class Dashboard extends Component {
       });
     }
   }
-
 
   deleteVaga() {
     userService.deleteVaga(this.state.data._id).then(
@@ -65,9 +73,36 @@ export default class Dashboard extends Component {
     )
   }
 
+  match() {
+    userService.match(this.state.data._id, this.state.currentUser.id).then(
+      response => {
+        this.setState({
+          message: response.data.message,
+          successful: true,
+          loading: false
+        });
+      },
+      setTimeout(function () {
+        window.location.reload(1);
+      }, 3000),
+      error => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
 
+        this.setState({
+          successful: false,
+          message: resMessage,
+          loading: false
+        });
+      }
+    )
+  }
   render() {
-    const { show, family } = this.state;
+    const { show, family, content } = this.state;
     const data = this.props
     return (
 
@@ -106,6 +141,9 @@ export default class Dashboard extends Component {
                 <div className="card card-container bg-white">
                   {!this.state.successful && (
                     <div>
+
+
+                      <p>ID: {data._id}</p>
                       <p>Escolaridade: {data.escolaridade}</p>
                       <p>Experiência: {data.experiencia}</p>
                       <p>Filhos: {data.filhos}</p>
@@ -113,6 +151,13 @@ export default class Dashboard extends Component {
                       <p>Natação: {data.natacao ? <span>Sim</span> : <span>Não</span>}</p>
                       <p>Habilitação: {data.habilitacao ? <span>Sim</span> : <span>Não</span>}</p>
                       <p>Carro: {data.carro ? <span>Sim</span> : <span>Não</span>}</p>
+                      <hr></hr>
+
+
+                      <p>Família: {data.user}</p>
+                      <p>Aupair: {data.aupair}</p>
+
+                      {console.log(window.location.pathname)}
 
 
                       {family ? <h3><button
@@ -120,9 +165,9 @@ export default class Dashboard extends Component {
                         onClick={this.deleteVaga}
                       >
                         Deletar
-                      </button></h3> : <h5><button
+                      </button></h3> : !this.state.pathmatch ? null : <h5><button
                         className="badge badge-primary  mr-2"
-                        onClick={this.Candidatar}
+                        onClick={this.match}
                       >
                         Candidatar-se
                       </button></h5>}

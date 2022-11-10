@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const API_URL = 'https://aupamatch-api3.onrender.com/api/test/';
+const API_URL = 'http://localhost:8080/api/test/';
 
 class UserService {
   getPublicContent() {
@@ -36,6 +36,26 @@ class UserService {
       headers: authHeader(),
       params: {
         vagaID: id,
+      },
+    });
+  }
+
+  match(vagaID, aupairID){
+    return axios.get(API_URL + 'match', {
+      headers: authHeader(),
+      params: {
+        vagaID: vagaID,
+        aupairID: aupairID,
+      },
+    });
+  }
+
+  findmatches(user){
+    return axios.get(API_URL + 'matches', {
+      headers: authHeader(),
+      params: {
+        id : user.id,
+        roles: user.roles.toString()
       },
     });
   }
