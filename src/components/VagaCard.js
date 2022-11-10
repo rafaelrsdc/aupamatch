@@ -47,7 +47,7 @@ export default class Dashboard extends Component {
       },
       setTimeout(function () {
         window.location.reload(1);
-      }, 1000),
+      }, 3000),
       error => {
         const resMessage =
           (error.response &&
