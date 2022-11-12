@@ -49,11 +49,6 @@ export default class RegisterVaga extends Component {
   constructor(props) {
     super(props);
     this.handleRegister = this.handleRegister.bind(this);
-    this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onChangeEmail = this.onChangeEmail.bind(this);
-    this.onChangeName = this.onChangeName.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
-    this.onChangeGroup = this.onChangeGroup.bind(this);
     this.onChangeEscolaridade = this.onChangeEscolaridade.bind(this);
     this.onChangeExperiencia = this.onChangeExperiencia.bind(this);
     this.onChangeDescricao = this.onChangeDescricao.bind(this);
@@ -69,7 +64,7 @@ export default class RegisterVaga extends Component {
       email: "",
       password: "",
       loading: false,
-      successful: false,
+      successful: true,
       message: "",
       group: "",
       escolaridade: "Ensino Fundamental",
@@ -91,18 +86,6 @@ export default class RegisterVaga extends Component {
       });
     }
 
-  }
-
-  onChangeUsername(e) {
-    this.setState({
-      username: e.target.value
-    });
-  }
-
-  onChangeName(e) {
-    this.setState({
-      name: e.target.value
-    });
   }
 
   onChangeEscolaridade(e) {
@@ -147,23 +130,6 @@ export default class RegisterVaga extends Component {
     })
   }
 
-  onChangeGroup(e) {
-    this.setState({
-      group: e.target.value
-    });
-  }
-  onChangeEmail(e) {
-    this.setState({
-      email: e.target.value
-    });
-  }
-
-  onChangePassword(e) {
-    this.setState({
-      password: e.target.value
-    });
-  }
-
   handleRegister(e) {
     e.preventDefault();
 
@@ -190,9 +156,12 @@ export default class RegisterVaga extends Component {
         response => {
           this.setState({
             message: response.data.message,
-            successful: true,
+            successful: false,
             loading: false
-          });
+          })
+          setTimeout(function () {
+            window.location.reload(1);
+          }, 500)
         },
         error => {
           const resMessage =
@@ -208,9 +177,6 @@ export default class RegisterVaga extends Component {
             loading: false
           });
         },
-        setTimeout(function(){
-          window.location.reload(1);
-       }, 2000),
       );
     } else {
       this.setState({
@@ -226,6 +192,12 @@ export default class RegisterVaga extends Component {
         <div className="w-full h-full justify-center bg-gray-50 border-b-2 border-gray-100" >
           <div className="col-md-12">
             <div className="card card-container bg-white">
+              {this.state.loading && (
+                <div class="d-flex justify-content-center">
+                  <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>)}
               <h4 className="font-medium text-xl">
                 <Translation>
                   {
@@ -240,7 +212,7 @@ export default class RegisterVaga extends Component {
                   this.form = c;
                 }}
               >
-                {!this.state.successful && (
+                {this.state.successful && (
                   <div>
                     <p>Escolaridade da Aupair:</p>
                     <select onChange={this.onChangeEscolaridade} class="block appearance-none w-full  bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 pr-8 rounded  leading-tight focus:outline-none focus:shadow-outline">
@@ -269,7 +241,7 @@ export default class RegisterVaga extends Component {
                     <label for="name">Descrição:</label>
 
                     <textarea type="text" onChange={this.onChangeDescricao} class="w-full h-20   bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 pr-8 rounded  focus:outline-none focus:shadow-outline" id="name" name="name" required
-                      minlength="4"  />
+                      minlength="4" />
 
                     <div class="flex items-center my-1">
                       <input onChange={this.onChangeNatação} defaultChecked={this.state.natacao} type="checkbox" />
@@ -310,8 +282,8 @@ export default class RegisterVaga extends Component {
                     <div
                       className={
                         this.state.successful
-                          ? "alert alert-success"
-                          : "alert alert-danger"
+                          ? "alert alert-danger"
+                          : "alert alert-success"
                       }
                       role="alert"
                     >

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import {Row} from "react-bootstrap"
+import { Row } from "react-bootstrap"
 import UserService from "../services/user.service";
 import EventBus from "../common/EventBus";
 import AuthService from "../services/auth.service";
-import VagaCard from "./VagaCard";
+import VagaCard from "./cardvaga.component";
 
 
 export default class Matches extends Component {
@@ -15,7 +15,8 @@ export default class Matches extends Component {
       currentIndex: -1,
       family: true,
       successful: false,
-      message: ""
+      message: "",
+      loading: true
     };
   }
 
@@ -32,7 +33,7 @@ export default class Matches extends Component {
   componentDidMount() {
     const currentUser = AuthService.getCurrentUser();
 
-    if (currentUser.roles.toString() !== "ROLE_FAMILY") this.setState({ family: false  });
+    if (currentUser.roles.toString() !== "ROLE_FAMILY") this.setState({ family: false });
 
     UserService.findmatches(currentUser).then(
       response => {
@@ -40,16 +41,20 @@ export default class Matches extends Component {
           content: response.data,
           message: response.data.message,
           successful: true,
+          loading: false
         });
       },
       error => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
         this.setState({
-          content:
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString()
+          loading: false,
+          message: resMessage
         });
 
         if (error.response && error.response.status === 401) {
@@ -61,11 +66,16 @@ export default class Matches extends Component {
 
   render() {
 
-    const { content, currentIndex} = this.state;
+    const { content, currentIndex } = this.state;
     return (
       <div>
         <h1>Matches</h1>
         <hr></hr>
+        {this.state.loading &&
+          <div class="spinner-border m-5" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>}
+
         {this.state.successful && (
           <div >
             {console.log("contnet é " + content)}

@@ -9,8 +9,8 @@ import Navbar from "./Navbar";
 import Button from 'react-bootstrap/Button';
 import { Card, CardGroup, Col, Row, Modal, Form } from 'react-bootstrap/';
 import RegisterVaga from "./register-vaga.component";
-import Vaga from "./vaga.component";
-import MinhasVagas from "./cadastroevagas";
+import Vaga from "./vagas.component";
+import MinhasVagas from "./cadastroevagas.component";
 
 
 export default class Dashboard extends Component {
