@@ -54,7 +54,8 @@ export default class MinhasVagas extends Component {
               </Modal.Body>
             </Modal>
             {family ? <><hr></hr>
-              <h2>Minhas Vagas</h2></> : <h2>Vagas Disponíveis</h2>}
+              <h2>Minhas Vagas</h2></> : <><h2>Vagas Disponíveis</h2> <hr></hr></>}
+              
 
             <span class="hidden ">
               <BoardUser /></span>

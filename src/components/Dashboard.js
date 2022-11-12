@@ -19,9 +19,6 @@ export default class Dashboard extends Component {
   componentDidMount() {
     const currentUser = AuthService.getCurrentUser();
     if (!currentUser) this.setState({ redirect: "/home" })
-    else {
-      if (currentUser.roles.toString() !== "ROLE_FAMILY") this.setState({ family: false });
-    }
 
     this.setState({ currentUser: currentUser, userReady: true })
 
