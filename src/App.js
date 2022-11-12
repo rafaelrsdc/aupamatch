@@ -97,7 +97,7 @@ class App extends Component {
                 </div>
                   <Dropdown className="hidden lg:flex mr-16">
                     <Dropdown.Toggle variant="Secondary" id="dropdown-basic">
-                      {currentUser.name}
+                      {currentUser.name.split(' ')[0]}
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       <Dropdown.Item href="/profile">Perfil</Dropdown.Item>

@@ -1,17 +1,9 @@
 import React, { Component } from "react";
-import { Navigate, Link, Outlet } from "react-router-dom";
+import { Outlet, Link, Navigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
-import { Routes, Route } from "react-router-dom";
-import BoardUser from "./board-user.component";
 
-
-import Navbar from "./Navbar";
 import Button from 'react-bootstrap/Button';
-import { Card, CardGroup, Col, Row, Modal, Form } from 'react-bootstrap/';
-import RegisterVaga from "./register-vaga.component";
-import Vaga from "./vagas.component";
-import MinhasVagas from "./cadastroevagas.component";
-
+import Profile from "./profile.component";
 
 export default class Dashboard extends Component {
   constructor(props) {
@@ -20,92 +12,63 @@ export default class Dashboard extends Component {
     this.state = {
       redirect: null,
       userReady: false,
-      currentUser: { name: "" },
+      currentUser: { username: "" }
     };
   }
 
   componentDidMount() {
     const currentUser = AuthService.getCurrentUser();
-
-
-    if (currentUser.roles.toString() !== "ROLE_FAMILY") this.setState({ family: false  });
-    if (!currentUser) this.setState({ redirect: "/home" });
+    if (!currentUser) this.setState({ redirect: "/home" })
+    else {
+      if (currentUser.roles.toString() !== "ROLE_FAMILY") this.setState({ family: false });
+    }
 
     this.setState({ currentUser: currentUser, userReady: true })
-  
+
   }
-
   render() {
-
-    if (this.state.redirect) {
-      return <Navigate to={this.state.redirect} />
-    }
-    const { currentUser} = this.state;
-
+    const { currentUser } = this.state;
     return (
-
       <div className="flex flex-auto">
         <div className="flex flex-auto h-full w-full bg-neutral-200">
-          <section className="mt-2 lg:ml-64 xl:mr-64 w-full h-4/5"><h1 className="">Dashboard</h1>
+          <section className="mt-2 lg:m-48 w-full h-4/5"><h1 className="">Dashboard</h1>
             <div class=" grid grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-5 min-h-full ">
               {/* <!--Card 1--> */}
               <div class="rounded overflow-hidden shadow-lg min-h-[1000px] bg-gray-100 p-4 col-span-3 row-span-2">
-                
                 <Outlet />
               </div>
-
-
               {/* <!--Card 2--> */}
               <div class="rounded overflow-hidden shadow-lg min-h-[300px] max-h-[400px] bg-gray-100 col-span-3 xl:col-span-1  ">
-                <div class="px-6 py-4">
-                  <h3>Сonta de {currentUser.name}</h3>
+                <div className="m-6">
+                  <img
+                    src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                    alt="profile-img"
+                    className="profile-img-card"
+                  />
+                </div>
 
-                  <hr></hr>
-                  {(this.state.userReady) ?
-                    <div className="">
-                      <p>
-                        <strong>Token:</strong>{" "}
-                        {currentUser.accessToken.substring(0, 20)} ...{" "}
-                        {currentUser.accessToken.substr(currentUser.accessToken.length - 20)}
-                      </p>
-                      <p>
-                        <strong>Id:</strong>{" "}
-                        {currentUser.id}
-                      </p>
-                      <p>
-                        <strong>Email:</strong>{" "}
-                        {currentUser.email}
-                      </p>
-                      <strong>Authorities:</strong>
-                      <ul>
-                        {currentUser.roles &&
-                          currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
-                      </ul>
-                    </div> : null}
+                <div class="justify-center">
+                  <h4 className="text-center">Сonta de {currentUser.name}</h4>
+                </div>
+                <div className="text-center mt-6">
 
+                  <Link to="/profile" className="btn btn-primary">Editar Perfil</Link>
 
                 </div>
+
+
               </div>
+
+              {/* <!--Card 3--> */}
               <div class="rounded overflow-hidden shadow-lg bg-gray-100 min-h-[300px] max-h-[400px] col-span-3 xl:col-span-1 row-span-2">
                 <div class="px-6 py-4">
                   <div class="font-bold text-xl mb-2 "></div>
-                  <h2>Perfil de {currentUser.name}</h2>                 <spam><Button variant="primary" onClick={null}>
-                    Editar Perfil
-                  </Button></spam>
+                  <h2>Meus interesses</h2>
                   <hr></hr>
-
-
                 </div>
               </div>
-
-
-
-
             </div>
           </section>
-        </div>
-
-        <div className="">
         </div>
       </div>
     );
