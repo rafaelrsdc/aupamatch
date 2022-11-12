@@ -19,7 +19,7 @@ export default class Dashboard extends Component {
       loading: false,
       successful: false,
       message: "",
-      pathmatch:true,
+      pathmatch: true,
     };
   }
 
@@ -28,12 +28,11 @@ export default class Dashboard extends Component {
 
     const pathname = window.location.pathname;
 
-    if(pathname === "/dashboard/matches")
-    {
+    if (pathname === "/dashboard/matches") {
       this.setState({
         pathmatch: false
       });
-      
+
     }
     if (user.roles.toString() !== "ROLE_FAMILY") this.setState({ family: false });
 
@@ -44,7 +43,17 @@ export default class Dashboard extends Component {
     }
   }
 
+  handleRegister(e) {
+    e.preventDefault();
+  }
+
   deleteVaga() {
+    this.setState({
+      successful: true,
+      loading: true
+    });
+
+
     userService.deleteVaga(this.state.data._id).then(
       response => {
         this.setState({
@@ -52,10 +61,11 @@ export default class Dashboard extends Component {
           successful: true,
           loading: false
         });
+        setTimeout(function () {
+          window.location.reload(1);
+        }, 500)
       },
-      setTimeout(function () {
-        window.location.reload(1);
-      }, 3000),
+
       error => {
         const resMessage =
           (error.response &&
@@ -74,17 +84,21 @@ export default class Dashboard extends Component {
   }
 
   match() {
+    this.setState({
+      successful: true,
+      loading: true
+    });
     userService.match(this.state.data._id, this.state.currentUser.id).then(
       response => {
         this.setState({
           message: response.data.message,
           successful: true,
           loading: false
-        });
+        })
+        setTimeout(function () {
+          window.location.reload(1);
+        }, 500)
       },
-      setTimeout(function () {
-        window.location.reload(1);
-      }, 3000),
       error => {
         const resMessage =
           (error.response &&
@@ -102,7 +116,7 @@ export default class Dashboard extends Component {
     )
   }
   render() {
-    const { show, family, content } = this.state;
+    const { show, family } = this.state;
     const data = this.props
     return (
 
@@ -139,10 +153,14 @@ export default class Dashboard extends Component {
             <div className="w-full h-full justify-center bg-gray-50 border-b-2 border-gray-100" >
               <div className="col-md-12">
                 <div className="card card-container bg-white">
+                  {this.state.loading && (
+                    <div class="d-flex justify-content-center">
+                      <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                    </div>)}
                   {!this.state.successful && (
                     <div>
-
-
                       <p>ID: {data._id}</p>
                       <p>Escolaridade: {data.escolaridade}</p>
                       <p>Experiência: {data.experiencia}</p>

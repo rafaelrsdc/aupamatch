@@ -24,7 +24,7 @@ import Topbar from "./components/Topbar";
 import Footer from "./components/Footer";
 import Section from "./components/Section";
 import TranslationBar from "./components/TranslationBar";
-import MinhasVagas from "./components/cadastroevagas";
+import MinhasVagas from "./components/cadastroevagas.component";
 import Matches from "./components/matches.component";
 
 class App extends Component {

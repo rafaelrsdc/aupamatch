@@ -67,7 +67,7 @@ export default function Topbar() {
                 {t("login")}
               </a>
             </Link>
-            <Link to={"/register"}>
+            <Link to={"/register"} className="mr-4">
               <a
                 href="#"
                 className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-600"
@@ -75,10 +75,13 @@ export default function Topbar() {
                 {t("signup")}
               </a>
             </Link>
+            <TranslationBar/>
+
           </div>
-          <TranslationBar />
+          
 
         </div>
+        
         
       </div>
 
@@ -107,6 +110,7 @@ export default function Topbar() {
                       </a>
                     </Link>
                   </p>
+                  <TranslationBar/>
                 </div>
                 <div className="-mr-2">
                   <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500">

@@ -3,7 +3,7 @@ import { Row } from "react-bootstrap"
 import UserService from "../services/user.service";
 import EventBus from "../common/EventBus";
 import AuthService from "../services/auth.service";
-import VagaCard from "./VagaCard";
+import VagaCard from "./cardvaga.component";
 
 export default class Vaga extends Component {
   constructor(props) {
@@ -13,7 +13,9 @@ export default class Vaga extends Component {
       content: [],
       currentIndex: -1,
       family: true,
-      successful:false
+      successful: false,
+      loading: true,
+      message: ""
     };
   }
 
@@ -36,17 +38,22 @@ export default class Vaga extends Component {
       response => {
         this.setState({
           content: response.data,
-          successful: true
+          successful: true,
+          message: "",
+          loading:false
         });
       },
       error => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
         this.setState({
-          content:
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString()
+          loading: false,
+          message: resMessage
         });
 
         if (error.response && error.response.status === 401) {
@@ -61,10 +68,13 @@ export default class Vaga extends Component {
     const { content, currentIndex } = this.state;
     return (
       <div>
+        {this.state.loading && (
+          <div class="spinner-border m-5" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        )}
         {this.state.successful && (
           <div >
-            {console.log("contnet é " + content)}
-
             <div className='row-wrapper'>
               <Row>
                 {content.map(product => (
