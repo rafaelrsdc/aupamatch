@@ -29,7 +29,7 @@ export default function TranslationBar() {
   
   return (
 
-          <div className="flex w-10 mr-4">
+          <div className="flex w-10">
           <img src={BRFLAG} className="mr-1" alt="my image" onClick={changeLanguage("pt")}/>
             <img src={USFLAG} className="ml-1" alt="my image" onClick={changeLanguage("en")}/> 
           </div>

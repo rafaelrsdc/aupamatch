@@ -3,7 +3,7 @@ import { Navigate, Link } from "react-router-dom";
 import AuthService from "../services/auth.service";
 import BoardUser from "./board-user.component";
 
-import Navbar from "./Navbar";
+import Navbar from "./sidebar";
 import Button from 'react-bootstrap/Button';
 import { Card, CardGroup, Col, Row, Modal, Form } from 'react-bootstrap/';
 import RegisterVaga from "./register-vaga.component";
