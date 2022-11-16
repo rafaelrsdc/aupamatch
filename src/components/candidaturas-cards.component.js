@@ -114,14 +114,14 @@ export default class CandidaturaCard extends Component {
 
     match() {
         this.setState({
-            successful: false,
+            successful: true,
             loading: true
         });
         userService.match(this.state.data._id, this.state.data.vaga[0]).then(
             response => {
                 this.setState({
                     message: response.data.message,
-                    successful: false,
+                    successful: true,
                     loading: false
                 })
                 setTimeout(function () {
@@ -228,7 +228,7 @@ export default class CandidaturaCard extends Component {
                                 </Card.Header>
                                 <Card.Body>
                                     <Card.Text>
-                                        {this.state.successful &&
+                                        {!this.state.successful &&
                                             <div className="form-group">
                                                 <div
                                                     className={

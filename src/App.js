@@ -111,7 +111,7 @@ class App extends Component {
                   </Dropdown>
                   <div className="lg:hidden">
                     <Nav.Link href="/dashboard"><p>Dashboard</p></Nav.Link>
-                    <Nav.Link href="/dashboard/matches"><p>Matches</p></Nav.Link>
+                    <Nav.Link href="/dashboard/candidaturas"><p>Candidaturas</p></Nav.Link>
                     <Nav.Link href="/profile"><p>Perfil</p></Nav.Link>
                     <Nav.Link href="/user"><p>Configurações</p></Nav.Link>
                     <NavDropdown.Divider />
