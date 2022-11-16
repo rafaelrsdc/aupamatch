@@ -163,45 +163,84 @@ export default class Cardminhasvagas extends Component {
         const { currentIndex } = this.state;
         const data = this.props
         return (
-
-            <Col xs={8} md={8} lg={4} key={data.id} >
-
-
-
-                {family ? (
-                    <div>
-                        {data.escolha ?
-                            <Card border="success" onClick={() => this.setState({ show: true })} id="familycard">
-                                <Card.Header>
-                                    <Card.Title>
-                                        Vaga para {data.filhos} {(data.filhos) === "01" ? <span>filho</span> : <span>filhos</span>}
-                                    </Card.Title>
-                                </Card.Header>
-                                <Card.Body>
-                                    <Card.Text>
-                                        <div>
+            <div>
+                <Col xs={8} md={8} lg={4} key={data.id} >
+                    {family ? (
+                        <div>
+                            {data.escolha ?
+                                <Card border="success" onClick={() => this.setState({ show: true })} id="familycard">
+                                    <Card.Header>
+                                        <Card.Title>
+                                            Vaga para {data.filhos} {(data.filhos) === "01" ? <span>filho</span> : <span>filhos</span>}
+                                        </Card.Title>
+                                    </Card.Header>
+                                    <Card.Body>
+                                        <Card.Text>
                                             <div>
-                                                <p>ID: {data._id}</p>
-                                                <p>Escolaridade: {data.escolaridade}</p>
-                                                <p>Experiência: {data.experiencia}</p>
-                                                <p>Filhos: {data.filhos}</p>
-                                                <p>Descrição: {data.descricao}</p>
-                                                <p>Natação: {data.natacao ? <span>Sim</span> : <span>Não</span>}</p>
-                                                <p>Habilitação: {data.habilitacao ? <span>Sim</span> : <span>Não</span>}</p>
-                                                <p>Carro: {data.carro ? <span>Sim</span> : <span>Não</span>}</p>
+                                                <div>
+                                                    <p>ID: {data._id}</p>
+                                                    <p>Escolaridade: {data.escolaridade}</p>
+                                                    <p>Experiência: {data.experiencia}</p>
+                                                    <p>Filhos: {data.filhos}</p>
+                                                    <p>Descrição: {data.descricao}</p>
+                                                    <p>Natação: {data.natacao ? <span>Sim</span> : <span>Não</span>}</p>
+                                                    <p>Habilitação: {data.habilitacao ? <span>Sim</span> : <span>Não</span>}</p>
+                                                    <p>Carro: {data.carro ? <span>Sim</span> : <span>Não</span>}</p>
+                                                </div>
+                                                <hr></hr>
+                                                {family ?
+                                                    <div className="form-group">
+                                                        <div
+                                                            className={
+                                                                "alert alert-success"
+                                                            }
+                                                            role="alert"
+                                                        >
+                                                            Match Feito
+                                                        </div>
+                                                    </div> : !this.state.pathmatch ? null :
+                                                        window.location.pathname === "/dashboard/candidaturas" ? <h5><button
+                                                            className="badge badge-danger mr-2"
+                                                            onClick={this.deleteCandidatura}
+                                                        >
+                                                            Cancelar Candidatura
+                                                        </button></h5> :
+                                                            <h5><button
+                                                                className="badge badge-primary  mr-2"
+                                                                onClick={this.candidatar}
+                                                            >
+                                                                Candidatar-se
+                                                            </button></h5>}
                                             </div>
-                                            <hr></hr>
-                                            {family ?
-                                                <div className="form-group">
-                                                    <div
-                                                        className={
-                                                            "alert alert-success"
-                                                        }
-                                                        role="alert"
-                                                    >
-                                                        Match Feito
-                                                    </div>
-                                                </div> : !this.state.pathmatch ? null :
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card> :
+                                <Card onClick={() => this.setState({ show: true })} id="familycard">
+                                    <Card.Header>
+                                        <Card.Title>
+                                            Vaga para {data.filhos} {(data.filhos) === "01" ? <span>filho</span> : <span>filhos</span>}
+                                        </Card.Title>
+                                    </Card.Header>
+                                    <Card.Body>
+                                        <Card.Text>
+                                            <div>
+                                                <div>
+                                                    <p>ID: {data._id}</p>
+                                                    <p>Escolaridade: {data.escolaridade}</p>
+                                                    <p>Experiência: {data.experiencia}</p>
+                                                    <p>Filhos: {data.filhos}</p>
+                                                    <p>Descrição: {data.descricao}</p>
+                                                    <p>Natação: {data.natacao ? <span>Sim</span> : <span>Não</span>}</p>
+                                                    <p>Habilitação: {data.habilitacao ? <span>Sim</span> : <span>Não</span>}</p>
+                                                    <p>Carro: {data.carro ? <span>Sim</span> : <span>Não</span>}</p>
+                                                </div>
+                                                <hr></hr>
+                                                {family ? <h3><button
+                                                    className="badge badge-danger mr-2"
+                                                    onClick={this.deleteVaga}
+                                                >
+                                                    Deletar Vaga
+                                                </button></h3> : !this.state.pathmatch ? null :
                                                     window.location.pathname === "/dashboard/candidaturas" ? <h5><button
                                                         className="badge badge-danger mr-2"
                                                         onClick={this.deleteCandidatura}
@@ -214,19 +253,57 @@ export default class Cardminhasvagas extends Component {
                                                         >
                                                             Candidatar-se
                                                         </button></h5>}
-                                        </div>
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card> :
-                            <Card onClick={() => this.setState({ show: true })} id="familycard">
-                                <Card.Header>
-                                    <Card.Title>
-                                        Vaga para {data.filhos} {(data.filhos) === "01" ? <span>filho</span> : <span>filhos</span>}
-                                    </Card.Title>
-                                </Card.Header>
-                                <Card.Body>
-                                    <Card.Text>
-                                        <div>
+                                            </div>
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            }
+                        </div>
+                    ) :
+                        <Card style={{ width: '20rem' }} onClick={() => this.setState({ show: true })} id="vagascard">
+                            <Card.Header>
+                                <Card.Title>
+                                    Vaga para {data.filhos} {(data.filhos) === "01" ? <span>filho</span> : <span>filhos</span>}
+                                </Card.Title>
+                            </Card.Header>
+                            <Card.Body>
+                                <Card.Text>
+                                    <div>
+                                        <p> {data.descricao}</p>
+                                        <hr></hr>
+                                        <h5><button
+                                            className="badge badge-primary  mr-2"
+                                            onClick={this.candidatar}
+                                        >
+                                            Candidatar-se
+                                        </button></h5>
+                                    </div>
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    }
+                    <Modal
+                        show={show}
+                        onHide={() => this.setState({ show: false })}
+                        dialogClassName="modal-90w"
+                        aria-labelledby="example-custom-modal-styling-title"
+                    >
+                        <Modal.Header closeButton>
+                            <Modal.Title id="example-custom-modal-styling-title">
+                                Vaga para {data.filhos} {(data.filhos) === "01" ? <span>filho</span> : <span>filhos</span>}
+                            </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <div className="w-full h-full justify-center bg-gray-50 border-b-2 border-gray-100" >
+                                <div className="col-md-12">
+                                    <div className="card card-container bg-white">
+                                        {this.state.loading && (
+                                            <div class="d-flex justify-content-center">
+                                                <div class="spinner-border" role="status">
+                                                    <span class="sr-only">Loading...</span>
+                                                </div>
+                                            </div>)}
+                                        {!this.state.successful && (
                                             <div>
                                                 <p>ID: {data._id}</p>
                                                 <p>Escolaridade: {data.escolaridade}</p>
@@ -236,209 +313,126 @@ export default class Cardminhasvagas extends Component {
                                                 <p>Natação: {data.natacao ? <span>Sim</span> : <span>Não</span>}</p>
                                                 <p>Habilitação: {data.habilitacao ? <span>Sim</span> : <span>Não</span>}</p>
                                                 <p>Carro: {data.carro ? <span>Sim</span> : <span>Não</span>}</p>
-                                            </div>
-                                            <hr></hr>
-                                            {family ? <h3><button
-                                                className="badge badge-danger mr-2"
-                                                onClick={this.deleteVaga}
-                                            >
-                                                Deletar Vaga
-                                            </button></h3> : !this.state.pathmatch ? null :
-                                                window.location.pathname === "/dashboard/candidaturas" ? <h5><button
-                                                    className="badge badge-danger mr-2"
-                                                    onClick={this.deleteCandidatura}
-                                                >
-                                                    Cancelar Candidatura
-                                                </button></h5> :
-                                                    <h5><button
-                                                        className="badge badge-primary  mr-2"
-                                                        onClick={this.candidatar}
-                                                    >
-                                                        Candidatar-se
-                                                    </button></h5>}
-                                        </div>
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
-                        }
+                                                {family ?
 
-                    </div>
-                ) :
-                    <Card style={{ width: '20rem' }} onClick={() => this.setState({ show: true })} id="vagascard">
-                        <Card.Header>
-                            <Card.Title>
-                                Vaga para {data.filhos} {(data.filhos) === "01" ? <span>filho</span> : <span>filhos</span>}
-                            </Card.Title>
-                        </Card.Header>
-                        <Card.Body>
-                            <Card.Text>
-                                <div>
-                                    <p> {data.descricao}</p>
-                                    <hr></hr>
-                                    <h5><button
-                                        className="badge badge-primary  mr-2"
-                                        onClick={this.candidatar}
-                                    >
-                                        Candidatar-se
-                                    </button></h5>
-                                </div>
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-                }
-
-
-
-
-                
-                <Modal
-                    show={show}
-                    onHide={() => this.setState({ show: false })}
-                    dialogClassName="modal-90w"
-                    aria-labelledby="example-custom-modal-styling-title"
-                >
-                    <Modal.Header closeButton>
-                        <Modal.Title id="example-custom-modal-styling-title">
-                            Vaga para {data.filhos} {(data.filhos) === "01" ? <span>filho</span> : <span>filhos</span>}
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <div className="w-full h-full justify-center bg-gray-50 border-b-2 border-gray-100" >
-                            <div className="col-md-12">
-                                <div className="card card-container bg-white">
-                                    {this.state.loading && (
-                                        <div class="d-flex justify-content-center">
-                                            <div class="spinner-border" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                        </div>)}
-                                    {!this.state.successful && (
-                                        <div>
-                                            <p>ID: {data._id}</p>
-                                            <p>Escolaridade: {data.escolaridade}</p>
-                                            <p>Experiência: {data.experiencia}</p>
-                                            <p>Filhos: {data.filhos}</p>
-                                            <p>Descrição: {data.descricao}</p>
-                                            <p>Natação: {data.natacao ? <span>Sim</span> : <span>Não</span>}</p>
-                                            <p>Habilitação: {data.habilitacao ? <span>Sim</span> : <span>Não</span>}</p>
-                                            <p>Carro: {data.carro ? <span>Sim</span> : <span>Não</span>}</p>
-                                            {family ? 
-
-                                            <div>
-                                                {data.escolha ?                                                     <div
-                                                        className={
-                                                            "alert alert-success"
-                                                        }
-                                                        role="alert"
-                                                    >
-                                                        Match Feito
-                                                    </div> :
-                                                 <h4><button
-                                                 className="badge badge-danger mr-2"
-                                                 onClick={this.deleteVaga}
-                                             >
-                                                 Deletar Vaga
-                                             </button></h4>
-                                                
-                                                }
-
-
-
-                                            </div>
-                                            
-                                            
-                                            : !this.state.pathmatch ? null :
-                                                window.location.pathname === "/dashboard/candidaturas" ? <h5><button
-                                                    className="badge badge-danger mr-2"
-                                                    onClick={this.deleteCandidatura}
-                                                >
-                                                    Cancelar Candidatura
-                                                </button></h5> :
-                                                    <h5><hr></hr><button
-                                                        className="badge badge-primary  mr-2"
-                                                        onClick={this.candidatar}
-                                                    >
-                                                        Candidatar-se
-                                                    </button></h5>}
-
-                                            {family && <div>                                                    <hr></hr>
-                                                <h6>Candidaturas</h6>
-                                                {data.aupair.map((x, i) =>
-                                                    <div className="flex justify-end mb-3">
-                                                        <div className="mr-auto"><button onClick={() => this.setState({ profileid: x, show1: true })}>Aupair {i} : {x}</button></div>
-                                                        <div className="">
-                                                            <button
-                                                                className="badge badge-primary mr-4"
-                                                                onClick={this.match}
+                                                    <div>
+                                                        {data.escolha ?
+                                                            <div
+                                                                className={
+                                                                    "alert alert-success"
+                                                                }
+                                                                role="alert"
                                                             >
-                                                                Escolher
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                )}</div>}
-                                        </div>
-                                    )}
-                                    {this.state.message && (
-                                        <div className="form-group">
-                                            <div
-                                                className={
-                                                    this.state.successful
-                                                        ? "alert alert-success"
-                                                        : "alert alert-danger"
-                                                }
-                                                role="alert"
-                                            >
-                                                {this.state.message}
-                                            </div>
-                                        </div>
-                                    )}
+                                                                Match Feito
+                                                            </div> :
+                                                            <h4><button
+                                                                className="badge badge-danger mr-2"
+                                                                onClick={this.deleteVaga}
+                                                            >
+                                                                Deletar Vaga
+                                                            </button></h4>
 
+                                                        }
+
+
+
+                                                    </div>
+
+
+                                                    : !this.state.pathmatch ? null :
+                                                        window.location.pathname === "/dashboard/candidaturas" ? <h5><button
+                                                            className="badge badge-danger mr-2"
+                                                            onClick={this.deleteCandidatura}
+                                                        >
+                                                            Cancelar Candidatura
+                                                        </button></h5> :
+                                                            <h5><hr></hr><button
+                                                                className="badge badge-primary  mr-2"
+                                                                onClick={this.candidatar}
+                                                            >
+                                                                Candidatar-se
+                                                            </button></h5>}
+
+                                                {family && <div>                                                    <hr></hr>
+                                                    <h6>Candidaturas</h6>
+                                                    {data.aupair.map((x, i) =>
+                                                        <div className="flex justify-end mb-3">
+                                                            <div className="mr-auto"><button onClick={() => this.setState({ profileid: x, show1: true })}>Aupair {i} : {x}</button></div>
+                                                            <div className="">
+                                                                <button
+                                                                    className="badge badge-primary mr-4"
+                                                                    onClick={this.match}
+                                                                >
+                                                                    Escolher
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    )}</div>}
+                                            </div>
+                                        )}
+                                        {this.state.message && (
+                                            <div className="form-group">
+                                                <div
+                                                    className={
+                                                        this.state.successful
+                                                            ? "alert alert-success"
+                                                            : "alert alert-danger"
+                                                    }
+                                                    role="alert"
+                                                >
+                                                    {this.state.message}
+                                                </div>
+                                            </div>
+                                        )}
+
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </Modal.Body>
-                </Modal>
+                        </Modal.Body>
+                    </Modal>
 
 
-                <Modal
-                    show={show1}
-                    onHide={() => this.setState({ show1: false })}
-                    dialogClassName="modal-90w"
-                    aria-labelledby="example-custom-modal-styling-title"
-                    onEntering={this.getprofile}
-                >
-                    <Modal.Header closeButton>
-                        <Modal.Title id="example-custom-modal-styling-title">
-                            <strong>{this.state.content.name}</strong> Profile
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        {(this.state.userReady) ?
-                            <div >
-                                <p>
-                                    <strong>Id:</strong>{" "}
-                                    {this.state.content._id}
-                                </p>
-                                <p>
-                                    <strong>Email:</strong>{" "}
-                                    {this.state.content.email}
-                                </p>
-                                <p>
-                                    <strong>Name:</strong>{" "}
-                                    {this.state.content.name}
-                                </p>
-                                <button
-                                    className="badge badge-primary mr-4"
-                                    onClick={this.match}
-                                >
-                                    Escolher
-                                </button>
-                            </div>
-                            : null}
-                    </Modal.Body>
-                </Modal>
+                    <Modal
+                        show={show1}
+                        onHide={() => this.setState({ show1: false })}
+                        dialogClassName="modal-90w"
+                        aria-labelledby="example-custom-modal-styling-title"
+                        onEntering={this.getprofile}
+                    >
+                        <Modal.Header closeButton>
+                            <Modal.Title id="example-custom-modal-styling-title">
+                                <strong>{this.state.content.name}</strong> Profile
+                            </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            {(this.state.userReady) ?
+                                <div >
+                                    <p>
+                                        <strong>Id:</strong>{" "}
+                                        {this.state.content._id}
+                                    </p>
+                                    <p>
+                                        <strong>Email:</strong>{" "}
+                                        {this.state.content.email}
+                                    </p>
+                                    <p>
+                                        <strong>Name:</strong>{" "}
+                                        {this.state.content.name}
+                                    </p>
+                                    <button
+                                        className="badge badge-primary mr-4"
+                                        onClick={this.match}
+                                    >
+                                        Escolher
+                                    </button>
+                                </div>
+                                : null}
+                        </Modal.Body>
+                    </Modal>
 
-            </Col>
+                </Col>
+            </div>
+
         )
     }
 }

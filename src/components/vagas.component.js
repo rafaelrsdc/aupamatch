@@ -16,6 +16,7 @@ export default class MinhasVagas extends Component {
 
     this.state = {
       family: true,
+      loading: true,
       show: false,
       setShow: false,
       successful: false,
@@ -59,29 +60,22 @@ export default class MinhasVagas extends Component {
         }
       },
     );
-
     if (currentUser)
       if (currentUser.roles.toString() !== "ROLE_FAMILY") this.setState({ family: false });
   }
-
   render() {
     const { show, family, content } = this.state;
-
     return (
       <div>
+        
         <div>
-
           {(!this.state.vagas) ? <div>
             {family && (
               <Button variant="primary" onClick={() => this.setState({ show: true })}>
                 Cadastrar uma Vaga
               </Button>
             )
-
-
             }</div> : null}
-
-
           <Modal
             show={show}
             onHide={() => this.setState({ show: false })}
@@ -97,7 +91,6 @@ export default class MinhasVagas extends Component {
               <RegisterVaga />
             </Modal.Body>
           </Modal>
-
           {(this.state.vagas) ?
             <div>
               {family ? <>
@@ -117,7 +110,7 @@ export default class MinhasVagas extends Component {
             </div>
           }
           <div>
-            {this.state.loading && (
+          {this.state.loading && (
               <div class="spinner-border m-5" role="status">
                 <span class="sr-only">Loading...</span>
               </div>
@@ -131,10 +124,7 @@ export default class MinhasVagas extends Component {
                     ))}
                   </Row>
                 </div>
-
               </div>
-
-
             )}
 
             {this.state.message && (
@@ -152,13 +142,8 @@ export default class MinhasVagas extends Component {
               </div>
             )}
           </div>
-
         </div>
-
       </div>
-
-
-
     );
   }
 }
