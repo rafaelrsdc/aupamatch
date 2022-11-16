@@ -67,7 +67,6 @@ export default class MinhasVagas extends Component {
     const { show, family, content } = this.state;
     return (
       <div>
-        
         <div>
           {(!this.state.vagas) ? <div>
             {family && (

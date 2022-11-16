@@ -16,7 +16,8 @@ export default class Candidaturas extends Component {
       message: "",
       loading: true,
       profileid: null,
-      vagas: []
+      vagas: [],
+      candidaturas: true
     };
   }
   displayVaga = (vagas) => {
@@ -49,7 +50,7 @@ export default class Candidaturas extends Component {
               error.response.data.message) ||
             error.message ||
             error.toString();
-  
+
           this.setState({
             loading: false,
             message: resMessage
@@ -62,6 +63,11 @@ export default class Candidaturas extends Component {
     }
     UserService.getcandidaturas(currentUser).then(
       response => {
+        if (response.data.length === 0) {
+          this.setState({
+            candidaturas: false,
+          });
+        }
         this.setState({
           content: response.data,
           message: response.data.message,
@@ -87,7 +93,7 @@ export default class Candidaturas extends Component {
         }
       },
     )
-;
+      ;
   }
   render() {
     const { content, currentIndex, vagas } = this.state;
@@ -101,6 +107,17 @@ export default class Candidaturas extends Component {
           </div>}
         {this.state.successful && (
           <div >
+            {!this.state.candidaturas && 
+              <div
+                className={
+                  "alert alert-dark my-3"
+
+                }
+                role="alert"
+              >
+                Não há candidaturas no momento.
+              </div>
+            }
             <div className='row-wrapper'>
               <Row>
                 {content.map(product => (
@@ -108,7 +125,7 @@ export default class Candidaturas extends Component {
                 ))}
               </Row>
             </div>
-          </div> )}
+          </div>)}
         {this.state.message && (
           <div className="form-group">
             <div

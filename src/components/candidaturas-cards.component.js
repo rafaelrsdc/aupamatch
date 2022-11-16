@@ -54,7 +54,7 @@ export default class CandidaturaCard extends Component {
             response => {
                 this.setState({
                     content: response.data,
-                    successful: true,
+                    successful: false,
                     loading: false,
                 });
             }
@@ -80,19 +80,19 @@ export default class CandidaturaCard extends Component {
 
     deleteVaga() {
         this.setState({
-            successful: true,
+            successful: false,
             loading: true
         });
         userService.deleteVaga(this.state.data._id).then(
             response => {
                 this.setState({
                     message: response.data.message,
-                    successful: true,
+                    successful: false,
                     loading: false
                 });
                 setTimeout(function () {
                     window.location.reload(1);
-                }, 500)
+                }, 1000)
             },
 
             error => {
@@ -114,19 +114,19 @@ export default class CandidaturaCard extends Component {
 
     match() {
         this.setState({
-            successful: true,
+            successful: false,
             loading: true
         });
         userService.match(this.state.data._id, this.state.data.vaga[0]).then(
             response => {
                 this.setState({
                     message: response.data.message,
-                    successful: true,
+                    successful: false,
                     loading: false
                 })
                 setTimeout(function () {
                     window.location.reload(1);
-                }, 500)
+                }, 1000)
             },
             error => {
                 const resMessage =
@@ -160,7 +160,7 @@ export default class CandidaturaCard extends Component {
                 });
                 setTimeout(function () {
                     window.location.reload(1);
-                }, 500)
+                }, 1000)
             },
 
             error => {
@@ -194,7 +194,7 @@ export default class CandidaturaCard extends Component {
                 })
                 setTimeout(function () {
                     window.location.reload(1);
-                }, 500)
+                }, 1000)
             },
             error => {
                 const resMessage =
@@ -217,136 +217,123 @@ export default class CandidaturaCard extends Component {
         const data = this.props
         return (
             <div>
-                {this.state.loading &&
-                    <div class="spinner-border m-5" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>}
-                {this.state.successful &&
+                <div>
                     <Col xs={8} md={8} lg={4} key={data.id} >
                         {this.state.data.escolha ?
                             <Card style={{ width: '20rem' }} border="success" onClick={() => this.setState({ show: true })}>
                                 <Card.Header>
                                     <Card.Title>
-                                        {!family ? (<div>Candidatura para {this.state.content.name}</div>) : (<div>Candidatura de {this.state.content.name}</div>)}
+                                        {!this.state.loading ? <div>{!family ? (<div>Candidatura para {this.state.content.name}</div>) : (<div>Candidatura de {this.state.content.name}</div>)} </div> : null}
                                     </Card.Title>
                                 </Card.Header>
                                 <Card.Body>
                                     <Card.Text>
-                                        <div className="form-group">
-                                            <div
-                                                className={
-                                                    "alert alert-success"
-                                                }
-                                                role="alert"
-                                            >
-                                                Match Feito
+                                        {this.state.successful &&
+                                            <div className="form-group">
+                                                <div
+                                                    className={
+                                                        "alert alert-success"
+                                                    }
+                                                    role="alert"
+                                                >
+                                                    Match Feito
+                                                </div>
                                             </div>
-                                        </div>
+                                        }
                                     </Card.Text>
                                 </Card.Body>
                             </Card> :
                             <Card style={{ width: '20rem' }} onClick={() => this.setState({ show: true })}>
                                 <Card.Header>
                                     <Card.Title>
-                                        {!family ? (<div>Candidatura para {this.state.content.name}</div>) : (<div>Candidatura de {this.state.content.name}</div>)}
+                                        {!this.state.loading ? <div>{!family ? (<div>Candidatura para {this.state.content.name}</div>) : (<div>Candidatura de {this.state.content.name}</div>)} </div> : null}
                                     </Card.Title>
                                 </Card.Header>
                                 <Card.Body>
                                     <Card.Text>
-                                        {family ? <div className="flex">
-                                            <h4>
-                                                <button
-                                                    className="badge badge-primary mr-2"
-                                                    onClick={this.match}>
-                                                    Escolher
-                                                </button>
-                                            </h4>
-                                            <h4>
-                                                <button
-                                                    className="badge badge-danger mr-2"
-                                                    onClick={this.deleteCandidatura}>
-                                                    Dispensar
-                                                </button>
-                                            </h4>
-                                        </div>
-                                            :
-                                            <h5>
-                                                <button
-                                                    className="badge badge-danger mr-2"
-                                                    onClick={this.deleteCandidatura}>
-                                                    Cancelar Candidatura
-                                                </button>
-                                            </h5>
-                                        }
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>}
-                        
-                    </Col>
-                }
-                <Modal
-                            show={show}
-                            onHide={() => this.setState({ show: false })}
-                            dialogClassName="modal-90w"
-                            aria-labelledby="example-custom-modal-styling-title"
-                        >
-                            <Modal.Header closeButton>
-                                <Modal.Title id="example-custom-modal-styling-title">
-                                    {!family ? (<div>Candidatura para {this.state.content.name}</div>) : (<div>Candidatura de {this.state.content.name}</div>)}
-                                </Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                                {this.state.loading && (
-                                    <div class="d-flex justify-content-center">
-                                        <div class="spinner-border" role="status">
-                                            <span class="sr-only">Loading...</span>
-                                        </div>
-                                    </div>)}
-                                {this.state.successful &&
-                                    <div className="col-md-12">
-                                        <p>Nome: {this.state.content.name}</p>
-                                        <p>Email: {this.state.content.email}</p>
-                                        <hr></hr>
-                                        {!data.escolha ?
-                                            <div className="flex">
+                                        {!this.state.successful &&
+                                            <div>
                                                 {family ? <div className="flex">
                                                     <h4>
-                                                        <button
-                                                            className="badge badge-primary mr-2"
-                                                            onClick={this.match}>
-                                                            Escolher
-                                                        </button>
+                                                        {!this.state.loading &&
+                                                            <button
+                                                                className="badge badge-primary mr-2"
+                                                                onClick={this.match}>
+                                                                Escolher
+                                                            </button>
+                                                        }
                                                     </h4>
                                                     <h4>
-                                                        <button
-                                                            className="badge badge-danger mr-2"
-                                                            onClick={this.deleteCandidatura}>
-                                                            Dispensar
-                                                        </button>
+                                                        {!this.state.loading &&
+                                                            <button
+                                                                className="badge badge-danger mr-2"
+                                                                onClick={this.deleteCandidatura}>
+                                                                Dispensar
+                                                            </button>
+                                                        }
                                                     </h4>
                                                 </div>
                                                     :
-                                                    <div>
-                                                        <p>Escolaridade: {vaga.escolaridade}</p>
-                                                        <p>Experiência: {vaga.experiencia}</p>
-                                                        <p>Filhos: {vaga.filhos}</p>
-                                                        <p>Descrição: {vaga.descricao}</p>
-                                                        <p>Natação: {vaga.natacao ? <span>Sim</span> : <span>Não</span>}</p>
-                                                        <p>Habilitação: {vaga.habilitacao ? <span>Sim</span> : <span>Não</span>}</p>
-                                                        <p>Carro: {vaga.carro ? <span>Sim</span> : <span>Não</span>}</p>
-                                                        <hr></hr>
-                                                        <h5>
+                                                    <h5>
+                                                        {!this.state.loading &&
                                                             <button
                                                                 className="badge badge-danger mr-2"
                                                                 onClick={this.deleteCandidatura}>
                                                                 Cancelar Candidatura
                                                             </button>
-                                                        </h5>
-                                                    </div>
-                                                }
-                                            </div> : (
+                                                        }
 
-                                                <div className="form-group">
+                                                    </h5>
+                                                }
+                                            </div>
+                                        }
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>}
+                    </Col>
+                    <Modal
+                        show={show}
+                        onHide={() => this.setState({ show: false })}
+                        dialogClassName="modal-90w"
+                        aria-labelledby="example-custom-modal-styling-title"
+                    >
+                        <Modal.Header closeButton>
+                            <Modal.Title id="example-custom-modal-styling-title">
+                                {!family ? (<div>Candidatura para {this.state.content.name}</div>) : (<div>Candidatura de {this.state.content.name}</div>)}
+                            </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            {this.state.loading && (
+                                <div class="d-flex justify-content-center">
+                                    <div class="spinner-border" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>)}
+                            {!this.state.successful &&
+                                <div className="col-md-12">
+                                    <p>Nome: {this.state.content.name}</p>
+                                    <p>Email: {this.state.content.email}</p>
+                                    <hr></hr>
+                                    {!data.escolha ?
+                                        <div className="flex">
+                                            {family ? <div className="flex">
+                                                <h4>
+                                                    <button
+                                                        className="badge badge-primary mr-2"
+                                                        onClick={this.match}>
+                                                        Escolher
+                                                    </button>
+                                                </h4>
+                                                <h4>
+                                                    <button
+                                                        className="badge badge-danger mr-2"
+                                                        onClick={this.deleteCandidatura}>
+                                                        Dispensar
+                                                    </button>
+                                                </h4>
+                                            </div>
+                                                :
+                                                <div>
                                                     <p>Escolaridade: {vaga.escolaridade}</p>
                                                     <p>Experiência: {vaga.experiencia}</p>
                                                     <p>Filhos: {vaga.filhos}</p>
@@ -355,43 +342,63 @@ export default class CandidaturaCard extends Component {
                                                     <p>Habilitação: {vaga.habilitacao ? <span>Sim</span> : <span>Não</span>}</p>
                                                     <p>Carro: {vaga.carro ? <span>Sim</span> : <span>Não</span>}</p>
                                                     <hr></hr>
-                                                    <div
-                                                        className={
-                                                            "alert alert-success"
-                                                        }
-                                                        role="alert"
-                                                    >
-                                                        Match Feito
-                                                    </div>
                                                     <h5>
                                                         <button
                                                             className="badge badge-danger mr-2"
                                                             onClick={this.deleteCandidatura}>
-                                                            Cancelar Match
+                                                            Cancelar Candidatura
                                                         </button>
                                                     </h5>
                                                 </div>
-                                            )
-                                        }
-                                    </div>
-                                }
-                                {this.state.message && (
-                                    <div className="form-group">
-                                        <div
-                                            className={
-                                                this.state.successful
-                                                    ? "alert alert-success"
-                                                    : "alert alert-danger"
                                             }
-                                            role="alert"
-                                        >
-                                            {this.state.message}
-                                        </div>
-                                    </div>
-                                )}
-                            </Modal.Body>
-                        </Modal>
+                                        </div> : (
 
+                                            <div className="form-group">
+                                                <p>Escolaridade: {vaga.escolaridade}</p>
+                                                <p>Experiência: {vaga.experiencia}</p>
+                                                <p>Filhos: {vaga.filhos}</p>
+                                                <p>Descrição: {vaga.descricao}</p>
+                                                <p>Natação: {vaga.natacao ? <span>Sim</span> : <span>Não</span>}</p>
+                                                <p>Habilitação: {vaga.habilitacao ? <span>Sim</span> : <span>Não</span>}</p>
+                                                <p>Carro: {vaga.carro ? <span>Sim</span> : <span>Não</span>}</p>
+                                                <hr></hr>
+                                                <div
+                                                    className={
+                                                        "alert alert-success"
+                                                    }
+                                                    role="alert "
+                                                >
+                                                    Match Feito
+                                                </div>
+                                                <h5>
+                                                    <button
+                                                        className="badge badge-danger mr-2"
+                                                        onClick={this.deleteCandidatura}>
+                                                        Cancelar Match
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                        )
+                                    }
+                                </div>
+                            }
+                            {this.state.message && (
+                                <div className="form-group">
+                                    <div
+                                        className={
+                                            this.state.successful
+                                                ? "alert alert-success"
+                                                : "alert alert-danger"
+                                        }
+                                        role="alert"
+                                    >
+                                        {this.state.message}
+                                    </div>
+                                </div>
+                            )}
+                        </Modal.Body>
+                    </Modal>
+                </div>
             </div>
 
         )
