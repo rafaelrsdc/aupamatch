@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Navigate, Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
-import Navbar from "./Navbar";
 
 export default class Profile extends Component {
   constructor(props) {
@@ -28,48 +27,41 @@ export default class Profile extends Component {
 
     const { currentUser } = this.state;
 
-    return (
-      <div className ="flex flex-auto">
+    return (<div className ="flex flex-auto">
 
-        <div className="flex flex-auto h-screen w-full bg-neutral-200">
-        <Navbar />
-        <div className="m-10 lg:ml-80 w-full mt-8"  >
-          {(this.state.userReady) ?
-            <div className="bg-white jumbotron ">
-                  <h3>
-                    <strong>{currentUser.username}</strong> Profile
-                  </h3>
-                  <hr></hr>
-                  <p>
-                    <strong>Token:</strong>{" "}
-                    {currentUser.accessToken.substring(0, 20)} ...{" "}
-                    {currentUser.accessToken.substr(currentUser.accessToken.length - 20)}
-                  </p>
-                  <p>
-                    <strong>Id:</strong>{" "}
-                    {currentUser.id}
-                  </p>
-                  <p>
-                    <strong>Email:</strong>{" "}
-                    {currentUser.email}
-                  </p>
-                  <p>
-                    <strong>Name:</strong>{" "}
-                    {currentUser.name}
-                  </p>
-                  <p>
-                    <strong>Phone:</strong>{" "}
-                    {currentUser.phone}
-                  </p>
-                  <strong>Authorities:</strong>
-                  <ul>
-                    {currentUser.roles &&
-                      currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
-                  </ul>
-          </div>: null}
-        </div>
-        </div>
-      </div>
-    );
+    <div className="flex flex-auto h-screen w-full bg-neutral-200">
+    <div className="m-10 lg:ml-80 w-full mt-8"  >
+      {(this.state.userReady) ?
+        <div className="bg-white jumbotron ">
+              <h3>
+                <strong>{currentUser.name}</strong> Profile
+              </h3>
+              <hr></hr>
+              <p>
+                <strong>Token:</strong>{" "}
+                {currentUser.accessToken.substring(0, 20)} ...{" "}
+                {currentUser.accessToken.substr(currentUser.accessToken.length - 20)}
+              </p>
+              <p>
+                <strong>Id:</strong>{" "}
+                {currentUser.id}
+              </p>
+              <p>
+                <strong>Email:</strong>{" "}
+                {currentUser.email}
+              </p>
+              <p>
+                <strong>Name:</strong>{" "}
+                {currentUser.name}
+              </p>
+              <strong>Authorities:</strong>
+              <ul>
+                {currentUser.roles &&
+                  currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
+              </ul>
+      </div>: null}
+    </div>
+    </div>
+  </div>);
   }
 }
