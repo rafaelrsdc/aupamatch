@@ -14,6 +14,7 @@ import AuthService from "../services/auth.service";
 import 'react-phone-input-2/lib/high-res.css'
 
 import { Translation } from "react-i18next"
+import userService from "../services/user.service";
 
 const required = value => {
   if (!value) {
@@ -143,7 +144,7 @@ export default class RegisterVaga extends Component {
 
     if (this.checkBtn.context._errors.length === 0) {
 
-      AuthService.criarVaga(
+      userService.criarVaga(
         this.state.escolaridade,
         this.state.experiencia,
         this.state.filhos,

@@ -26,7 +26,10 @@ export default class Dashboard extends Component {
   render() {
     const { currentUser } = this.state;
     return (
-      <div className="flex flex-auto">
+      <>
+                {!currentUser ? (<Navigate to="/home" />
+          ) : (<div></div>)}
+          <div className="flex flex-auto">
         <div className="flex flex-auto h-full w-full bg-neutral-200">
           <section className="mt-2 lg:m-48 w-full h-4/5"><h1 className="">Dashboard</h1>
             <div class=" grid grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-5 min-h-full ">
@@ -68,6 +71,11 @@ export default class Dashboard extends Component {
           </section>
         </div>
       </div>
+      
+      
+      </>
+      
+      
     );
 
   }

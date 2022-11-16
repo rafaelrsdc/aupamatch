@@ -12,7 +12,6 @@ import AuthService from "./services/auth.service";
 
 import Login from "./components/login.component";
 import Register from "./components/register.component";
-import Home from "./components/home.component";
 import Profile from "./components/profile.component";
 import BoardUser from "./components/board-user.component";
 import BoardModerator from "./components/board-moderator.component";
@@ -26,8 +25,9 @@ import Topbar from "./components/Topbar";
 import Footer from "./components/Footer";
 import Section from "./components/Section";
 import TranslationBar from "./components/TranslationBar";
-import MinhasVagas from "./components/cadastroevagas.component";
-import Matches from "./components/matches.component";
+import MinhasVagas from "./components/vagas.component";
+import Candidaturas from "./components/candidaturas.component";
+
 
 class App extends Component {
   constructor(props) {
@@ -80,10 +80,10 @@ class App extends Component {
 
     return (
       <div>
-
         {currentUser ? (
           <>
             <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+              
               <Navbar.Brand href="/">
                 <h3 className="sm:ml-12">AupaMatch</h3>
               </Navbar.Brand>
@@ -96,14 +96,12 @@ class App extends Component {
                         <a href="/dashboard" class="block pt-2 pr-4 pl-3 text-xl text-semibold text-gray-900 hover:text-blue-700" aria-current="page">Dashboard</a>
                       </li>
                       <li>
-                        <a href="/dashboard/matches" class="block pt-2 pr-4 pl-3 text-xl  text-gray-900 rounded hover:text-blue-700">Matches</a>
+                        <a href="/dashboard/candidaturas" class="block pt-2 pr-4 pl-3 text-xl  text-gray-900 rounded hover:text-blue-700">Candidaturas</a>
                       </li>
+                      
                     </ul>
                   </div>
-
                   <Dropdown className="hidden lg:flex mr-4">
-                    
-
                     <Dropdown.Menu>
                       <Dropdown.Item href="/profile">Perfil</Dropdown.Item>
                       <Dropdown.Item href="/user">Configurações</Dropdown.Item>
@@ -202,7 +200,7 @@ class App extends Component {
           <Routes>
             <Route path="/dashboard" element={<Dashboard />} >
               <Route index element={<MinhasVagas />} />
-              <Route path="matches" element={<Matches />} />
+              <Route path="candidaturas" element={<Candidaturas />} />
             </Route >
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

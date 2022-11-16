@@ -36,6 +36,7 @@ class Login extends Component {
       loading: false,
       message: "",
       currentUser: undefined,
+      redirect: null
     };
   }
 
@@ -47,6 +48,8 @@ class Login extends Component {
         currentUser: user,
       });
     }
+
+
   }
   onChangeUsername(e) {
     this.setState({
@@ -106,6 +109,7 @@ class Login extends Component {
   render() {
     const { currentUser } = this.state;
     const { t } = this.props
+
     return (
       <div className="flex flex-auto">
         {currentUser ? (<Navigate to="/profile" />

@@ -1,46 +1,44 @@
 import React, { Component } from "react";
-import { Row } from "react-bootstrap"
+import { Navigate, Link } from "react-router-dom";
+import AuthService from "../services/auth.service";
+import BoardUser from "./board-user.component";
 import UserService from "../services/user.service";
 import EventBus from "../common/EventBus";
-import AuthService from "../services/auth.service";
-import VagaCard from "./cardvaga.component";
 
-export default class Vaga extends Component {
+import Button from 'react-bootstrap/Button';
+import { Card, CardGroup, Col, Row, Modal, Form } from 'react-bootstrap/';
+import RegisterVaga from "./register-vaga.component";
+import Cardminhasvagas from "./vagas-cards.component";
+
+export default class MinhasVagas extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      content: [],
-      currentIndex: -1,
       family: true,
+      show: false,
+      setShow: false,
       successful: false,
-      loading: true,
-      message: ""
+      content: false,
+      vagas: true
     };
-  }
-
-  displayVaga = (vagas) => {
-    if (!vagas.length) return "null";
-
-    return vagas.map((vaga, index) => (
-      <div key={index} >
-        <h3>{vaga.filhos}</h3>
-      </div>
-    ))
   }
 
   componentDidMount() {
     const currentUser = AuthService.getCurrentUser();
 
-    if (currentUser.roles.toString() !== "ROLE_FAMILY") this.setState({ family: false });
-
-    UserService.getVaga(currentUser).then(
+    UserService.getVagas(currentUser).then(
       response => {
+        if (response.data.length === 0) {
+          this.setState({
+            vagas: false,
+          });
+        }
         this.setState({
           content: response.data,
           successful: true,
           message: "",
-          loading:false
+          loading: false
         });
       },
       error => {
@@ -61,48 +59,104 @@ export default class Vaga extends Component {
         }
       },
     );
+
+    if (currentUser)
+      if (currentUser.roles.toString() !== "ROLE_FAMILY") this.setState({ family: false });
   }
 
   render() {
+    const { show, family, content } = this.state;
 
-    const { content, currentIndex } = this.state;
     return (
       <div>
-        {this.state.loading && (
-          <div class="spinner-border m-5" role="status">
-            <span class="sr-only">Loading...</span>
-          </div>
-        )}
-        {this.state.successful && (
-          <div >
-            <div className='row-wrapper'>
-              <Row>
-                {content.map(product => (
-                  <VagaCard data={content} key={product.id} {...product} />
-                ))}
-              </Row>
-            </div>
+        <div>
 
-          </div>
+          {(!this.state.vagas) ? <div>
+            {family && (
+              <Button variant="primary" onClick={() => this.setState({ show: true })}>
+                Cadastrar uma Vaga
+              </Button>
+            )
 
 
-        )}
+            }</div> : null}
 
-        {this.state.message && (
-          <div className="form-group">
+
+          <Modal
+            show={show}
+            onHide={() => this.setState({ show: false })}
+            dialogClassName="modal-90w"
+            aria-labelledby="example-custom-modal-styling-title"
+          >
+            <Modal.Header closeButton>
+              <Modal.Title id="example-custom-modal-styling-title">
+                Cadastrar uma Vaga
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <RegisterVaga />
+            </Modal.Body>
+          </Modal>
+
+          {(this.state.vagas) ?
+            <div>
+              {family ? <>
+                <hr></hr>
+                <h2 className="">Minha Vaga</h2></>
+                :
+                <><h2>Vagas Disponíveis</h2> <hr></hr></>}
+            </div> :
             <div
               className={
-                this.state.successful
-                  ? "alert alert-success"
-                  : "alert alert-danger"
+                "alert alert-dark my-3"
+
               }
               role="alert"
             >
-              {this.state.message}
+              Não há vagas cadastradas no momento.
             </div>
+          }
+          <div>
+            {this.state.loading && (
+              <div class="spinner-border m-5" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            )}
+            {this.state.successful && (
+              <div >
+                <div className='row-wrapper'>
+                  <Row>
+                    {content.map(product => (
+                      <Cardminhasvagas data={content} key={product.id} {...product} />
+                    ))}
+                  </Row>
+                </div>
+
+              </div>
+
+
+            )}
+
+            {this.state.message && (
+              <div className="form-group">
+                <div
+                  className={
+                    this.state.successful
+                      ? "alert alert-success"
+                      : "alert alert-danger"
+                  }
+                  role="alert"
+                >
+                  {this.state.message}
+                </div>
+              </div>
+            )}
           </div>
-        )}
+
+        </div>
+
       </div>
+
 
 
     );

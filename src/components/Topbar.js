@@ -13,8 +13,6 @@ import {
 import { useTranslation } from "react-i18next";
 
 
-import BRFLAG from "../assets/brasil-flag.svg"
-import USFLAG from "../assets/eua-flag.svg"
 import TranslationBar from "./TranslationBar";
 
 
