@@ -40,17 +40,20 @@ class UserService {
     });
   }
 
-  criarVaga(escolaridade, experiencia, filhos, descricao, natacao, carro, habilitacao, id) {
+  criarVaga(escolaridade, experiencia, quantidade_criancas, descricao, natacao, carro_exclusivo, habilitacao) {
     return axios.post(API_URL + "vaga", {
       headers: authHeader(),
-      escolaridade,
+      escolaridade, 
       experiencia,
-      filhos,
+      quantidade_criancas,
       descricao,
       natacao,
-      carro,
+      carro_exclusivo,
       habilitacao,
-      id
+
+    },
+    {      
+      headers: authHeader(),
     });
   }
 

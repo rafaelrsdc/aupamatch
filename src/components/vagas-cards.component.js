@@ -171,7 +171,7 @@ export default class Cardminhasvagas extends Component {
                                 <Card border="success" onClick={() => this.setState({ show: true })} id="familycard">
                                     <Card.Header>
                                         <Card.Title>
-                                            Vaga para {data.filhos} {(data.filhos) === "01" ? <span>filho</span> : <span>filhos</span>}
+                                            Vaga para {data.quantidade_criancas} {(data.quantidade_criancas) === "01" ? <span>filho</span> : <span>filhos</span>}
                                         </Card.Title>
                                     </Card.Header>
                                     <Card.Body>
@@ -181,11 +181,11 @@ export default class Cardminhasvagas extends Component {
                                                     <p>ID: {data._id}</p>
                                                     <p>Escolaridade: {data.escolaridade}</p>
                                                     <p>Experiência: {data.experiencia}</p>
-                                                    <p>Filhos: {data.filhos}</p>
+                                                    <p>Filhos: {data.quantidade_criancas}</p>
                                                     <p>Descrição: {data.descricao}</p>
                                                     <p>Natação: {data.natacao ? <span>Sim</span> : <span>Não</span>}</p>
                                                     <p>Habilitação: {data.habilitacao ? <span>Sim</span> : <span>Não</span>}</p>
-                                                    <p>Carro: {data.carro ? <span>Sim</span> : <span>Não</span>}</p>
+                                                    <p>Carro: {data.carro_exclusivo ? <span>Sim</span> : <span>Não</span>}</p>
                                                 </div>
                                                 <hr></hr>
                                                 {family ?
@@ -218,7 +218,7 @@ export default class Cardminhasvagas extends Component {
                                 <Card onClick={() => this.setState({ show: true })} id="familycard">
                                     <Card.Header>
                                         <Card.Title>
-                                            Vaga para {data.filhos} {(data.filhos) === "01" ? <span>filho</span> : <span>filhos</span>}
+                                            Vaga para {data.quantidade_criancas} {(data.quantidade_criancas) === "01" ? <span>filho</span> : <span>filhos</span>}
                                         </Card.Title>
                                     </Card.Header>
                                     <Card.Body>
@@ -228,11 +228,11 @@ export default class Cardminhasvagas extends Component {
                                                     <p>ID: {data._id}</p>
                                                     <p>Escolaridade: {data.escolaridade}</p>
                                                     <p>Experiência: {data.experiencia}</p>
-                                                    <p>Filhos: {data.filhos}</p>
+                                                    <p>Filhos: {data.quantidade_criancas}</p>
                                                     <p>Descrição: {data.descricao}</p>
                                                     <p>Natação: {data.natacao ? <span>Sim</span> : <span>Não</span>}</p>
                                                     <p>Habilitação: {data.habilitacao ? <span>Sim</span> : <span>Não</span>}</p>
-                                                    <p>Carro: {data.carro ? <span>Sim</span> : <span>Não</span>}</p>
+                                                    <p>Carro: {data.carro_exclusivo ? <span>Sim</span> : <span>Não</span>}</p>
                                                 </div>
                                                 <hr></hr>
                                                 {family ? <h3><button
@@ -263,7 +263,7 @@ export default class Cardminhasvagas extends Component {
                         <Card style={{ width: '20rem' }} onClick={() => this.setState({ show: true })} id="vagascard">
                             <Card.Header>
                                 <Card.Title>
-                                    Vaga para {data.filhos} {(data.filhos) === "01" ? <span>filho</span> : <span>filhos</span>}
+                                    Vaga para {data.quantidade_criancas} {(data.quantidade_criancas) === "01" ? <span>filho</span> : <span>filhos</span>}
                                 </Card.Title>
                             </Card.Header>
                             <Card.Body>
@@ -290,7 +290,7 @@ export default class Cardminhasvagas extends Component {
                     >
                         <Modal.Header closeButton>
                             <Modal.Title id="example-custom-modal-styling-title">
-                                Vaga para {data.filhos} {(data.filhos) === "01" ? <span>filho</span> : <span>filhos</span>}
+                                Vaga para {data.quantidade_criancas} {(data.quantidade_criancas) === "01" ? <span>filho</span> : <span>filhos</span>}
                             </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
@@ -308,11 +308,11 @@ export default class Cardminhasvagas extends Component {
                                                 <p>ID: {data._id}</p>
                                                 <p>Escolaridade: {data.escolaridade}</p>
                                                 <p>Experiência: {data.experiencia}</p>
-                                                <p>Filhos: {data.filhos}</p>
+                                                <p>Filhos: {data.quantidade_criancas}</p>
                                                 <p>Descrição: {data.descricao}</p>
                                                 <p>Natação: {data.natacao ? <span>Sim</span> : <span>Não</span>}</p>
                                                 <p>Habilitação: {data.habilitacao ? <span>Sim</span> : <span>Não</span>}</p>
-                                                <p>Carro: {data.carro ? <span>Sim</span> : <span>Não</span>}</p>
+                                                <p>Carro: {data.carro_exclusivo ? <span>Sim</span> : <span>Não</span>}</p>
                                                 {family ?
 
                                                     <div>

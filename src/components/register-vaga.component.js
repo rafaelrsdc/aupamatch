@@ -69,10 +69,10 @@ export default class RegisterVaga extends Component {
       message: "",
       group: "",
       escolaridade: "Ensino Fundamental",
-      filhos: "01",
+      quantidade_filhos: "01",
       natacao: false,
       habilitacao: false,
-      carro: false,
+      carro_exclusivo: false,
       experiencia: "Inexperiente",
       descricao: ""
     };
@@ -109,7 +109,7 @@ export default class RegisterVaga extends Component {
 
   onChangeFilhos(e) {
     this.setState({
-      filhos: e.target.value
+      quantidade_filhos: e.target.value
     })
   }
 
@@ -127,7 +127,7 @@ export default class RegisterVaga extends Component {
 
   onChangeCarro(e) {
     this.setState({
-      carro: e.target.checked
+      carro_exclusivo: e.target.checked
     })
   }
 
@@ -145,12 +145,13 @@ export default class RegisterVaga extends Component {
     if (this.checkBtn.context._errors.length === 0) {
 
       userService.criarVaga(
+
         this.state.escolaridade,
         this.state.experiencia,
-        this.state.filhos,
+        this.state. quantidade_filhos,
         this.state.descricao,
         this.state.natacao,
-        this.state.carro,
+        this.state.carro_exclusivo,
         this.state.habilitacao,
         this.state.id
       ).then(
