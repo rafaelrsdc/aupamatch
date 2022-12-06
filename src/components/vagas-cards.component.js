@@ -180,7 +180,6 @@ export default class Cardminhasvagas extends Component {
                                                 <div>
                                                     <p>ID: {data._id}</p>
                                                     <p>Escolaridade: {data.escolaridade}</p>
-                                                    <p>Experiência: {data.experiencia}</p>
                                                     <p>Filhos: {data.quantidade_criancas}</p>
                                                     <p>Descrição: {data.descricao}</p>
                                                     <p>Natação: {data.natacao ? <span>Sim</span> : <span>Não</span>}</p>
@@ -227,7 +226,6 @@ export default class Cardminhasvagas extends Component {
                                                 <div>
                                                     <p>ID: {data._id}</p>
                                                     <p>Escolaridade: {data.escolaridade}</p>
-                                                    <p>Experiência: {data.experiencia}</p>
                                                     <p>Filhos: {data.quantidade_criancas}</p>
                                                     <p>Descrição: {data.descricao}</p>
                                                     <p>Natação: {data.natacao ? <span>Sim</span> : <span>Não</span>}</p>
@@ -307,7 +305,6 @@ export default class Cardminhasvagas extends Component {
                                             <div>
                                                 <p>ID: {data._id}</p>
                                                 <p>Escolaridade: {data.escolaridade}</p>
-                                                <p>Experiência: {data.experiencia}</p>
                                                 <p>Filhos: {data.quantidade_criancas}</p>
                                                 <p>Descrição: {data.descricao}</p>
                                                 <p>Natação: {data.natacao ? <span>Sim</span> : <span>Não</span>}</p>
